@@ -1,0 +1,26 @@
+# app/config/security.yml
+security:
+    firewalls:
+        armydata:
+            pattern: ^/*
+            provider: user
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login_check
+                default_target_path: site_index
+            logout:
+                path:       logout
+                target:     login
+            remember_me:
+                secret: '%secret%'
+                lifetime: 604800
+                path: /
+    access_control:
+      - { path: ^/(es|en)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/(es|en)/assault/edit/*, roles: [ROLE_ADMIN] }
+    providers:
+        user:
+            entity: { class: ArmyDataBundle\Entity\User, property: username }
+    encoders:
+        ArmyDataBundle\Entity\User: bcrypt

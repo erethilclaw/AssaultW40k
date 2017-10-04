@@ -1,0 +1,14 @@
+site_index:
+    path:     /
+    defaults: { _controller: ArmyDataBundle:Default:index }
+login:
+    path:     /login/
+    defaults: { _controller: ArmyDataBundle:Security:login }
+login_check:
+    path: /login_check
+logout:
+    path: /logout
+unit_index:
+    path:   /unit/
+    defaults: { _controller: ArmyDataBundle:Unit:index }
+

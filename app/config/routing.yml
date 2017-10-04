@@ -1,0 +1,8 @@
+army_data:
+    resource: "@ArmyDataBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/assault/
+    defaults:
+        _locale: %locale%
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

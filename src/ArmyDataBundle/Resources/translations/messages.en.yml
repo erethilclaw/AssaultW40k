@@ -1,0 +1,12 @@
+login:
+    msglogin: Sign in to start your session
+    sublogin: Sign in
+navbar:
+    units: units
+unit:
+    title: unit index
+    add: add unit
+generic:
+    act: actions
+    edt: edit
+    del: delete

@@ -1,0 +1,12 @@
+login:
+    msglogin: Inserte credenciales
+    sublogin: Inicio
+navbar:
+    units: unidades
+unit:
+    title: indice unidades
+    add: añadir unidad
+generic:
+    act: acciones
+    edt: editar
+    del: eliminar
