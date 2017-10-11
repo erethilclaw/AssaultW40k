@@ -5,8 +5,14 @@ navbar:
     units: units
 unit:
     title: unit index
+    nam: name
     add: add unit
+    new: new unit
+    show: Unit
+    edt: edit unit
 generic:
     act: actions
     edt: edit
     del: delete
+    list: return list
+    conf: Are you sure you want delete this item?

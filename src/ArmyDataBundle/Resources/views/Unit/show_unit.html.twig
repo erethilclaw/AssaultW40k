@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+{% block title %}Show unit{% endblock %}
+    {% block page_content %}
+        <!-- Page Content -->
+        <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ 'unit.show'|trans }}</h3><br>
+                    <a href="{{ path('unit_index') }}">{{ 'unit.title'|trans }}</a><br>
+                </div>
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th><i class="glyphicon glyphicon-user"></i></th>
+                            <th>HA</th>
+                            <th>HP</th>
+                            <th>F</th>
+                            <th>R</th>
+                            <th>H</th>
+                            <th>I</th>
+                            <th>A</th>
+                            <th>L</th>
+                            <th>S</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                {{ unit.name }}
+                            </td>
+
+                            <td>
+                                {{ unit.Ha }}
+                            </td>
+                            <td>
+                                {{ unit.Hp }}
+                            </td>
+                            <td>
+                                {{ unit.F }}
+                            </td>
+                            <td>
+                                {{ unit.R }}
+                            </td>
+                            <td>
+                                {{ unit.H }}
+                            </td>
+                            <td>
+                                {{ unit.I }}
+                            </td>
+                            <td>
+                                {{ unit.A }}
+                            </td>
+                            <td>
+                                {{ unit.L }}
+                            </td>
+                            <td>
+                                {{ unit.S }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <div class="box-footer">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('unit_edit', { 'id':unit.id }) }}"><span
+                                    class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a> <br>
+                        <a href="{{ path('unit_delete', { 'id':unit.id }) }}" onclick="
+return confirm('¿Estas segur que vols eliminar el destinatari?')">
+                            <button class="btn btn-danger">{{ 'generic.del'|trans }}</button>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- /.container -->
+    {% endblock %}
+    {% block leng %}
+        {% set locale = app.request.locale %}
+        {% if locale == 'es' %}
+            <span>Español</span>
+            <a href="{{ path('unit_show', { _locale: 'en', 'id':unit.id }) }}">English</a>
+        {% elseif locale == 'en' %}
+            <a href="{{ path('unit_show', { _locale: 'es', 'id':unit.id }) }}">Español</a>
+            <span>English</span>
+        {% endif %}
+    {% endblock %}

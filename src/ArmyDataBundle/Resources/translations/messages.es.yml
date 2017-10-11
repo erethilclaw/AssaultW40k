@@ -5,8 +5,14 @@ navbar:
     units: unidades
 unit:
     title: indice unidades
+    nam: nombre
     add: añadir unidad
+    new: nueva unidad
+    show: Unidad
+    edt: Modificar
 generic:
     act: acciones
     edt: editar
     del: eliminar
+    list: volver a lista
+    conf: ¿Seguro que quiere eliminar este elemento?

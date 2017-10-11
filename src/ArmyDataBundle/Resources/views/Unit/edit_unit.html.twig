@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+{% block title %}New Unit{% endblock %}
+    {% block page_content %}
+        <!-- Page Content -->
+        <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ 'unit.edt'|trans }}</h3><br>
+                    <a href="{{ path('unit_index') }}">{{ 'generic.list'|trans }}</a>
+                </div>
+                {{ form_start(edit_form,{'attr': {'role': 'form'}}) }}
+                {{ form_errors(edit_form) }}
+                <div class="box-body">
+                    <div class="form-group ">
+                        {{ form_label(edit_form.name) }}
+                        {{ form_errors(edit_form.name) }}
+                        {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.ha) }}
+                            {{ form_errors(edit_form.ha) }}
+                            {{ form_widget(edit_form.ha, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.hp) }}
+                            {{ form_errors(edit_form.hp) }}
+                            {{ form_widget(edit_form.hp, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.f) }}
+                            {{ form_errors(edit_form.f) }}
+                            {{ form_widget(edit_form.f, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.r) }}
+                            {{ form_errors(edit_form.r) }}
+                            {{ form_widget(edit_form.r, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.h) }}
+                            {{ form_errors(edit_form.h) }}
+                            {{ form_widget(edit_form.h, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.i) }}
+                            {{ form_errors(edit_form.i) }}
+                            {{ form_widget(edit_form.i, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.a) }}
+                            {{ form_errors(edit_form.a) }}
+                            {{ form_widget(edit_form.a, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.l) }}
+                            {{ form_errors(edit_form.l) }}
+                            {{ form_widget(edit_form.l, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.s) }}
+                            {{ form_errors(edit_form.s) }}
+                            {{ form_widget(edit_form.s, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary" type="submit">{{ 'unit.edt'|trans }}</button>
+                </div>
+                {{ form_end(edit_form) }}
+            </div>
+        </div>
+        <!-- /.container -->
+    {% endblock %}
+    {% block leng %}
+        {% set locale = app.request.locale %}
+        {% if locale == 'es' %}
+            <span>Español</span>
+            <a href="{{ path('unit_edit', { _locale: 'en', 'id':unit.id }) }}">English</a>
+        {% elseif locale == 'en' %}
+            <a href="{{ path('unit_edit', { _locale: 'es', 'id':unit.id }) }}">Español</a>
+            <span>English</span>
+        {% endif %}
+    {% endblock %}

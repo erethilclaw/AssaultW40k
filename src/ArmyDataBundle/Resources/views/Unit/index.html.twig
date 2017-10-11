@@ -37,7 +37,7 @@
             <div class="box">
                 <div class="box-header">
                     <h4 class="box-title">{{ 'unit.title'|trans }}</h4><br>
-                    <a href="">{{ 'unit.add'|trans }}</a>
+                    <a href="{{ path('unit_add') }}">{{ 'unit.add'|trans }}</a>
                 </div>
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-hover table-striped">
@@ -62,41 +62,41 @@
                         {% for unit in units %}
                             <tr>
                                 <td>
-                                    <a href="">{{ unit.name }}</a>
+                                    <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
                                 </td>
 
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.Ha }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.Hp }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.F }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.R }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.H }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.I }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.A }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.L }}</a>
                                 </td>
-                                <td><a href="">
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.S }}</a>
                                 </td>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <td>
-                                        <a href=" "><span
+                                        <a href=" {{ path('unit_edit', { 'id':unit.id }) }}"><span
                                                     class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a><br>
-                                        <a href="" onclick="
+                                        <a href="{{ path('unit_delete', { 'id':unit.id }) }}" onclick="
 return confirm('¿Estas segur que vols eliminar el destinatari?')"><span
                                                     class="glyphicon glyphicon-trash" id="eliminar"></span>{{ 'generic.del'|trans }}</a>
                                     </td>

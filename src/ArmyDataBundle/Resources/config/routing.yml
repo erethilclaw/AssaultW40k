@@ -11,4 +11,15 @@ logout:
 unit_index:
     path:   /unit/
     defaults: { _controller: ArmyDataBundle:Unit:index }
-
+unit_add:
+    path:   /edit/add_unit
+    defaults: { _controller: ArmyDataBundle:Unit:add }
+unit_show:
+    path:     /unit/show_unit/{id}
+    defaults: { _controller: ArmyDataBundle:Unit:show }
+unit_edit:
+    path:     /edit/edit_unit/{id}
+    defaults: { _controller: ArmyDataBundle:Unit:edit }
+unit_delete:
+    path:     /edit/delete_unit/{id}
+    defaults: { _controller: ArmyDataBundle:Unit:delete }
