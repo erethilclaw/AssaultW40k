@@ -23,3 +23,33 @@ unit_edit:
 unit_delete:
     path:     /edit/delete_unit/{id}
     defaults: { _controller: ArmyDataBundle:Unit:delete }
+army_index:
+    path:   /army/
+    defaults: { _controller: ArmyDataBundle:Army:index }
+army_add:
+    path:   /edit/add_army
+    defaults: { _controller: ArmyDataBundle:Army:add }
+army_show:
+    path:     /army/show_army/{id}
+    defaults: { _controller: ArmyDataBundle:Army:show }
+army_edit:
+    path:     /edit/edit_army/{id}
+    defaults: { _controller: ArmyDataBundle:Army:edit }
+army_delete:
+    path:     /edit/delete_army/{id}
+    defaults: { _controller: ArmyDataBundle:Army:delete }
+wp_index:
+    path:   /wp/
+    defaults: { _controller: ArmyDataBundle:Weapon:index }
+wp_add:
+    path:   /edit/add_wp
+    defaults: { _controller: ArmyDataBundle:Weapon:add }
+wp_show:
+    path:     /wp/show_wp/{id}
+    defaults: { _controller: ArmyDataBundle:Weapon:show }
+wp_edit:
+    path:     /edit/edit_wp/{id}
+    defaults: { _controller: ArmyDataBundle:Weapon:edit }
+wp_delete:
+    path:     /edit/delete_wp/{id}
+    defaults: { _controller: ArmyDataBundle:Weapon:delete }

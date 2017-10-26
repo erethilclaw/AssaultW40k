@@ -86,9 +86,16 @@
 
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
+                    <li><a href="{{ path('army_index') }}"><i class="glyphicon glyphicon-pawn"></i>
+                            <span>{{ "navbar.army"|trans }}</span></a></li>
+                </ul>
+                <ul class="sidebar-menu">
                     <li><a href="{{ path('unit_index') }}"><i class="glyphicon glyphicon-pawn"></i>
                             <span>{{ "navbar.units"|trans }}</span></a></li>
-
+                </ul>
+                <ul class="sidebar-menu">
+                    <li><a href="{{ path('wp_index') }}"><i class="glyphicon glyphicon-pawn"></i>
+                            <span>{{ "navbar.wp"|trans }}</span></a></li>
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

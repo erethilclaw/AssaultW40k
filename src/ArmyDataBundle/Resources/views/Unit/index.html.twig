@@ -53,6 +53,7 @@
                             <th>A</th>
                             <th>L</th>
                             <th>S</th>
+                            <th>{{ 'navbar.army'|trans }}</th>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <th><i class="glyphicon glyphicon-wrench"></i>{{ 'generic.act'|trans }}</th>
                             {% endif %}
@@ -91,6 +92,9 @@
                                 </td>
                                 <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
                                         {{ unit.S }}</a>
+                                </td>
+                                <td><a href="{{ path('army_show', {  'id':unit.army.id }) }}">
+                                        {{ unit.army }}</a>
                                 </td>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <td>

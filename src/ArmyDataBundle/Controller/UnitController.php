@@ -2,10 +2,11 @@
 
 namespace ArmyDataBundle\Controller;
 
+use ArmyDataBundle\Form\UnitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use ArmyDataBundle\Entity\Unit;
-
+use Doctrine\Common\Collections\ArrayCollection;
 
 class UnitController extends Controller
 {
@@ -18,7 +19,7 @@ class UnitController extends Controller
     public function addAction(Request $request)
     {
         $unit = new Unit();
-        $form = $this->createForm('ArmyDataBundle\Form\UnitType' , $unit);
+        $form = $this->createForm(UnitType::class, $unit);
 
         $form->handleRequest($request);
 

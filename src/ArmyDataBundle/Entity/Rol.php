@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Rol
  *
  * @ORM\Table(name="rol")
- * @ORM\Entity(repositoryClass="PctmonBundle\Repository\RolRepository")
+ * @ORM\Entity(repositoryClass="ArmyDataBundle\Repository\RolRepository")
  */
 class Rol
 {

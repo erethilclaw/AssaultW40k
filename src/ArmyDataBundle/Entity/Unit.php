@@ -5,6 +5,7 @@ namespace ArmyDataBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Unit
  *
@@ -26,7 +27,7 @@ class Unit
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
+     *
      */
     private $name;
 
@@ -92,6 +93,25 @@ class Unit
      * @ORM\Column(name="S", type="integer")
      */
     private $s;
+
+    /**
+     * Many Units have one Army
+     * @ORM\ManyToOne(targetEntity="ArmyDataBundle\Entity\Army", inversedBy="units")
+     * @ORM\JoinColumn(name="army_id", referencedColumnName="id")
+     */
+    private $army;
+
+    /**
+     * many units has Many Weapons
+     * @ORM\ManyToMany(targetEntity="ArmyDataBundle\Entity\Weapon", inversedBy="units")
+     */
+    private $weapons;
+
+    public function __construct()
+    {
+        $this->weapons = new ArrayCollection();
+    }
+
 
 
     /**
@@ -343,5 +363,50 @@ class Unit
     {
         return $this->s;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getArmy()
+    {
+        return $this->army;
+    }
+
+    /**
+     * @param mixed $army
+     */
+    public function setArmy($army)
+    {
+        $this->army = $army;
+    }
+
+    public function addWeapon( \ArmyDataBundle\Entity\Weapon $weapon)
+    {
+        $weapon->addUnit($this);
+        $this->weapons->add($weapon);
+    }
+
+    /**
+     * Remove unit
+     *
+     * @param $unit
+     */
+    public function removeWeapon( \ArmyDataBundle\Entity\Weapon $weapon)
+    {
+        $this->weapons->removeElement($weapon);
+    }
+
+    /**
+     *
+     */
+    public function clearWeapons(){
+        $this->weapons->clear();
+    }
+
+    public function __toString()
+    {
+        return (String)$this->name;
+    }
+
 }
 

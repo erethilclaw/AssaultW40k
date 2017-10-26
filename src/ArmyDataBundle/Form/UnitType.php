@@ -2,6 +2,7 @@
 
 namespace ArmyDataBundle\Form;
 
+use ArmyDataBundle\Entity\Army;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -13,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use ArmyDataBundle\Entity\Unit;
-
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UnitType extends AbstractType
 {
@@ -36,7 +37,11 @@ class UnitType extends AbstractType
                 '4' => 4,
                 '5' => 5,
                 '6' => 6)))
-
+            ->add('army', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+                'required' => false,
+                'class' => 'ArmyDataBundle\Entity\Army',
+                'label' => 'army.nam'
+            ));
         ;
     }
 

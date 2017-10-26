@@ -3,9 +3,11 @@ login:
     sublogin: Inicio
 navbar:
     units: unidades
+    army : ejercito
+    wp: armas
 unit:
     title: indice unidades
-    nam: nombre
+    nam: nombre unidad
     add: añadir unidad
     new: nueva unidad
     show: Unidad
@@ -16,3 +18,25 @@ generic:
     del: eliminar
     list: volver a lista
     conf: ¿Seguro que quiere eliminar este elemento?
+army:
+    title: Indice ejercitos
+    nam: nombre ejercito
+    add: añadir ejercito
+    new: nuevo ejercito
+    show: ejercito
+    edt: editar ejercito
+weapon:
+    title: Indice armas
+    nam: nombre arma
+    add: añadir arma
+    new: nueva arma
+    show: arma
+    edt: editar arma
+    rg: alcance
+    tp: tipo
+    st: disparos
+    as: asalto
+    ds: alcance
+    ps: pesada
+    rf: fuego rapido
+    ar: artilleria

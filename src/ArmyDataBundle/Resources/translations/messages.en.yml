@@ -3,9 +3,11 @@ login:
     sublogin: Sign in
 navbar:
     units: units
+    army: army
+    wp: weapons
 unit:
     title: unit index
-    nam: name
+    nam: name unit
     add: add unit
     new: new unit
     show: Unit
@@ -16,3 +18,25 @@ generic:
     del: delete
     list: return list
     conf: Are you sure you want delete this item?
+army:
+    title: army index
+    nam: name army
+    add: add army
+    new: new army
+    show: Army
+    edt: edit army
+weapon:
+    title: weapon index
+    nam: name weapon
+    add: add weapon
+    new: new weapon
+    show: Weapon
+    edt: edit weapon
+    rg: range
+    tp: type
+    st: shoots
+    as: assault
+    ds: range
+    ps: heavy
+    rf: rapid fire
+    ar: artillery
