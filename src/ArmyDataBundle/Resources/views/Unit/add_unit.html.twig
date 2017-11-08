@@ -1,5 +1,77 @@
 {% extends "base.html.twig" %}
 {% block title %}{{ 'unit.new'|trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        var $collectionHolderWeapon;
+
+        // setup an "add a tag" link
+        var $addWeaponLink = $('<a href="#" class="add_destinatari_link">{{ 'weapon.add'|trans }}</a>');
+        var $newWeaponLinkLi = $('<li></li>').append($addWeaponLink);
+
+        jQuery(document).ready(function () {
+            // Get the ul that holds the collection of tags
+            $collectionHolderWeapon = $('ul.weapons');
+
+            // add a delete link to all of the existing tag form li elements
+            $collectionHolderWeapon.find('li').each(function () {
+                addWeaponFormDeleteLink($(this));
+            });
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolderWeapon.append($newWeaponLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolderWeapon.data('index', $collectionHolderWeapon.find(':input').length);
+
+            $addWeaponLink.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addWeaponForm($collectionHolderWeapon, $newWeaponLinkLi);
+            });
+        });
+
+        function addWeaponForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+
+            // add a delete link to the new form
+            addWeaponFormDeleteLink($newFormLi);
+        }
+
+        function addWeaponFormDeleteLink($destinatariFormLi) {
+            var $removeFormA = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>{{ 'generic.del'|trans }}</a>');
+            $destinatariFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // remove the li for the tag form
+                $destinatariFormLi.remove();
+            });
+        }
+
+    </script>
+{% endblock %}
     {% block page_content %}
         <!-- Page Content -->
         <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
@@ -66,6 +138,20 @@
                             {{ form_label(form.army) }}
                             {{ form_errors(form.army) }}
                             {{ form_widget(form.army, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                            <label>{{ 'weapon.add'|trans }}</label>
+                            {{ form_label(form.weapons) }}
+                            <ul class="weapons"
+                                data-prototype="{{ form_widget(form.weapons.vars.prototype)|e }}">
+                                {# iterate over each existing tag and render its only field: name #}
+                                {% for weapon in form.weapons %}
+                                    <li>
+                                        {{ form_errors(weapon) }}
+                                        {{ form_widget(weapon) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                 </div>

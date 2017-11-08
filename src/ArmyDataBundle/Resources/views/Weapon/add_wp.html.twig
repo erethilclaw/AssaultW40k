@@ -63,7 +63,7 @@
         }
 
         function addArmyFormDeleteLink($armyFormLi) {
-            var $removeFormA = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>delete</a>');
+            var $removeFormA = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>{{ 'generic.del'|trans }}</a>');
             $armyFormLi.append($removeFormA);
 
             $removeFormA.on('click', function (e) {
@@ -124,7 +124,7 @@
         }
 
         function addUnitFormDeleteLink($unitFormLi) {
-            var $removeFormUnit = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>delete</a>');
+            var $removeFormUnit = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>{{ 'generic.del'|trans }}</a>');
             $unitFormLi.append($removeFormUnit);
 
             $removeFormUnit.on('click', function (e) {

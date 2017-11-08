@@ -3,6 +3,7 @@
 namespace ArmyDataBundle\Form;
 
 use ArmyDataBundle\Entity\Army;
+use ArmyDataBundle\Entity\Weapon;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -41,7 +42,19 @@ class UnitType extends AbstractType
                 'required' => false,
                 'class' => 'ArmyDataBundle\Entity\Army',
                 'label' => 'army.nam'
-            ));
+            ))
+            ->add('weapons',CollectionType::class, [
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'class' => Weapon::class,
+
+                ],
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'allow_extra_fields' => true,
+                'by_reference' => false,
+            ]);
         ;
     }
 

@@ -22,13 +22,15 @@ class WeaponController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($weapon);die();
+//            dump($weapon);die();
+            $units = $weapon->getUnits();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($weapon);
+          
             $em->flush($weapon);
 
-
-          return $this->redirectToRoute('wp_index');
+            return $this->redirectToRoute('wp_index');
         }
 
         return $this->render('@ArmyData/Weapon/add_wp.html.twig', array(

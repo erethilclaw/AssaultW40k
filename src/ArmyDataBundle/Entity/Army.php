@@ -44,8 +44,8 @@ class Army
 
     public function __construct()
     {
-        $this->units = new ArrayCollection();
-        $this->weapons = new ArrayCollection();
+        $this->units = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->weapons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -99,6 +99,8 @@ class Army
     {
         $unit->addWeapon($this);
         $this->units->add($unit);
+
+        return $this;
     }
 
     /**
@@ -126,10 +128,12 @@ class Army
         return $this->weapons;
     }
 
-    public function addWeapon( \ArmyDataBundle\Entity\Weapon $weapon)
+    public function addWeapons( \ArmyDataBundle\Entity\Weapon $weapon)
     {
-        $weapon->addArmy($this);
+        $weapon->addArmies($this);
         $this->weapons->add($weapon);
+
+        return $this;
     }
 
     /**
@@ -137,7 +141,7 @@ class Army
      *
      * @param $unit
      */
-    public function removeWeapon( \ArmyDataBundle\Entity\Weapon $weapon)
+    public function removeWeapons( \ArmyDataBundle\Entity\Weapon $weapon)
     {
         $this->weapons->removeElement($weapon);
     }

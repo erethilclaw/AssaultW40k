@@ -103,13 +103,13 @@ class Unit
 
     /**
      * many units has Many Weapons
-     * @ORM\ManyToMany(targetEntity="ArmyDataBundle\Entity\Weapon", inversedBy="units")
+     * @ORM\ManyToMany(targetEntity="Weapon", cascade={"persist"}, inversedBy="units")
      */
     private $weapons;
 
     public function __construct()
     {
-        $this->weapons = new ArrayCollection();
+        $this->weapons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -380,18 +380,39 @@ class Unit
         $this->army = $army;
     }
 
-    public function addWeapon( \ArmyDataBundle\Entity\Weapon $weapon)
+    /**
+     * @return mixed
+     */
+    public function getWeapons()
     {
-        $weapon->addUnit($this);
-        $this->weapons->add($weapon);
+        return $this->weapons;
     }
 
     /**
-     * Remove unit
-     *
-     * @param $unit
+     * @param mixed $weapons
      */
-    public function removeWeapon( \ArmyDataBundle\Entity\Weapon $weapon)
+    public function setWeapons($weapons)
+    {
+        $this->weapons = $weapons;
+    }
+
+    
+
+    public function addWeapons( \ArmyDataBundle\Entity\Weapon $weapon)
+    {
+        if (!$this->weapons->contains($weapon)){
+            $weapon->addUnits($this);
+            $this->weapons->add($weapon);
+        }
+        return $this;
+    }
+
+    /**
+     * Remove weapon
+     *
+     * @param $weapon
+     */
+    public function removeWeapons( \ArmyDataBundle\Entity\Weapon $weapon)
     {
         $this->weapons->removeElement($weapon);
     }

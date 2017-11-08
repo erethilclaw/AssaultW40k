@@ -66,7 +66,7 @@ class WeaponType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Weapon::class ,
+            'data_class' => 'ArmyDataBundle\Entity\Weapon' ,
         ));
     }
 

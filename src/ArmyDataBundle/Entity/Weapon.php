@@ -71,7 +71,7 @@ class Weapon
 
     /**
      * Many Weapons have many Units
-     * @ORM\ManyToMany(targetEntity="ArmyDataBundle\Entity\Unit", mappedBy="weapons")
+     * @ORM\ManyToMany(targetEntity="Unit", mappedBy="weapons")
      */
     private $units;
 
@@ -236,16 +236,37 @@ class Weapon
     }
 
     /**
+     * @param mixed $armies
+     */
+    public function setArmies($armies)
+    {
+        $this->armies = $armies;
+    }
+
+    /**
+     * @param mixed $units
+     */
+    public function setUnits($units)
+    {
+        $this->units = $units;
+    }
+
+
+
+    /**
      * Add army
      *
      * @param $army
      *
      * @return Weapon
      */
-    public function addArmy( \ArmyDataBundle\Entity\Army $army)
+    public function addArmies( \ArmyDataBundle\Entity\Army $army)
     {
-        $army->addWeapon($this);
-        $this->armies->add($army);
+        if (!$this->armies->contains($army)){
+            $army->addWeapons($this);
+            $this->armies->add($army);
+        }
+        return $this;
     }
 
     /**
@@ -253,7 +274,7 @@ class Weapon
      *
      * @param $army
      */
-    public function removeArmy( \ArmyDataBundle\Entity\Army $army)
+    public function removeArmies( \ArmyDataBundle\Entity\Army $army)
     {
         $this->armies->removeElement($army);
     }
@@ -280,10 +301,13 @@ class Weapon
      *
      * @return Weapon
      */
-    public function addUnit( \ArmyDataBundle\Entity\Unit $unit)
+    public function addUnits( \ArmyDataBundle\Entity\Unit $unit)
     {
-        $unit->addWeapon($this);
-        $this->units->add($unit);
+         if (!$this->units->contains($unit)){
+             $this->units = $unit;
+             $unit->addWeapons($this);
+         }
+        return $this;
     }
 
     /**
@@ -291,7 +315,7 @@ class Weapon
      *
      * @param $unit
      */
-    public function removeUnit( \ArmyDataBundle\Entity\Unit $unit)
+    public function removeUnits( \ArmyDataBundle\Entity\Unit $unit)
     {
         $this->units->removeElement($unit);
     }
@@ -303,13 +327,9 @@ class Weapon
         $this->units->clear();
     }
 
-
-
     public function __toString()
     {
         return (String)$this->name;
     }
-
-
 }
 
