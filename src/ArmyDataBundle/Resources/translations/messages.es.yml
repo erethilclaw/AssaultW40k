@@ -40,3 +40,4 @@ weapon:
     ps: pesada
     rf: fuego rapido
     ar: artilleria
+    delMsg: ¿Estas seguro que quieres eliminar esta arma?

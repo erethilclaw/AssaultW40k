@@ -103,7 +103,7 @@ class Unit
 
     /**
      * many units has Many Weapons
-     * @ORM\ManyToMany(targetEntity="Weapon", cascade={"persist"}, inversedBy="units")
+     * @ORM\ManyToMany(targetEntity="Weapon", cascade={"persist"},fetch="EXTRA_LAZY", inversedBy="units")
      */
     private $weapons;
 

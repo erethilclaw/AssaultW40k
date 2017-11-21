@@ -1,11 +1,149 @@
 {% extends "base.html.twig" %}
-{% block title %}{{ 'army.edt'|trans }}{% endblock %}
+{% block title %}{{ 'weapon.edt'|trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+
+    var $collectionHolder;
+    var $collectionHolderUnit;
+
+    // setup an "add a tag" link
+    var $addArmyLink = $('<a href="#" class="add_army_link">{{ 'army.new'|trans }}</a>');
+    var $newLinkLi = $('<li></li>').append($addArmyLink);
+
+    var $addUnitLink = $('<a href="#" class="add_unit_link">{{ 'unit.new'|trans }}</a>');
+    var $newLinkLiUnit = $('<li></li>').append($addUnitLink);
+
+    //armies
+    jQuery(document).ready(function () {
+        // Get the ul that holds the collection of tags
+        $collectionHolder = $('ul.armies');
+
+        // add a delete link to all of the existing tag form li elements
+        $collectionHolder.find('li').each(function () {
+            addArmyFormDeleteLink($(this));
+        });
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolder.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addArmyLink.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addArmyForm($collectionHolder, $newLinkLi);
+        });
+    });
+
+    function addArmyForm($collectionHolder, $newLinkLi) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolder.data('prototype');
+
+        // get the new index
+        var index = $collectionHolder.data('index');
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        var newForm = prototype.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+
+        // add a delete link to the new form
+        addArmyFormDeleteLink($newFormLi);
+    }
+
+    function addArmyFormDeleteLink($armyFormLi) {
+        var $removeFormA = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>{{ 'generic.del'|trans }}</a>');
+        $armyFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the li for the tag form
+            $armyFormLi.remove();
+        });
+    }
+
+    //Units
+    jQuery(document).ready(function () {
+        // Get the ul that holds the collection of tags
+        $collectionHolderUnit = $('ul.units');
+
+        // add a delete link to all of the existing tag form li elements
+        $collectionHolderUnit.find('li').each(function () {
+            addUnitFormDeleteLink($(this));
+        });
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolderUnit.append($newLinkLiUnit);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolderUnit.data('index', $collectionHolderUnit.find(':input').length);
+
+        $addUnitLink.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addArmyForm($collectionHolderUnit, $newLinkLiUnit);
+        });
+    });
+
+    function addUnitForm($collectionHolderUnit, $newLinkLiUnit) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolderUnit.data('prototype');
+
+        // get the new index
+        var index = $collectionHolderUnit.data('index');
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        var newForm = prototype.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolderUnit.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLiUnit = $('<li></li>').append(newForm);
+        $newLinkLiUnit.before($newFormLiUnit);
+
+        // add a delete link to the new form
+        addUnitFormDeleteLink($newFormLiUnit);
+    }
+
+    function addUnitFormDeleteLink($unitFormLi) {
+        var $removeFormUnit = $('<a href="#"><span class="glyphicon glyphicon-remove-sign"></span>{{ 'generic.del'|trans }}</a>');
+        $unitFormLi.append($removeFormUnit);
+
+        $removeFormUnit.on('click', function (e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the li for the tag form
+            $unitFormLi.remove();
+        });
+    }
+
+</script>
+{% endblock %}
     {% block page_content %}
         <!-- Page Content -->
         <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{ 'army.edt'|trans }}</h3><br>
+                    <h3 class="box-title">{{ 'weapon.edt'|trans }}</h3><br>
                     <a href="{{ path('army_index') }}">{{ 'generic.list'|trans }}</a>
                 </div>
                 {{ form_start(edit_form,{'attr': {'role': 'form'}}) }}
@@ -16,9 +154,63 @@
                         {{ form_errors(edit_form.name) }}
                         {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <div class="row">
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.distance) }}
+                            {{ form_errors(edit_form.distance) }}
+                            {{ form_widget(edit_form.distance, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.f) }}
+                            {{ form_errors(edit_form.f) }}
+                            {{ form_widget(edit_form.f, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.fp) }}
+                            {{ form_errors(edit_form.fp) }}
+                            {{ form_widget(edit_form.fp, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.type) }}
+                            {{ form_errors(edit_form.type) }}
+                            {{ form_widget(edit_form.type, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                            {{ form_label(edit_form.shoots) }}
+                            {{ form_errors(edit_form.shoots) }}
+                            {{ form_widget(edit_form.shoots, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-6 col-lg-6 col-sm-6 col-xs-6 ">
+                            {#{{ form_label(form.armies) }}#}
+                            <label>{{ 'army.add'|trans }}</label>
+                            <ul class="armies"
+                                data-prototype="{{ form_widget(edit_form.armies.vars.prototype)|e }}">
+                                {% for army in edit_form.armies %}
+                                    <li>
+                                        {{ form_errors(army) }}
+                                        {{ form_widget(army) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="form-group  col-md-6 col-lg-6 col-sm-6 col-xs-6 ">
+                            <label>{{ 'unit.add'|trans }}</label>
+                            <ul class="units"
+                                data-prototype="{{ form_widget(edit_form.units.vars.prototype)|e }}">
+                                {% for unit in edit_form.units %}
+                                    <li>
+                                        {{ form_errors(unit) }}
+                                        {{ form_widget(unit) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer">
-                    <button class="btn btn-primary" type="submit">{{ 'army.edt'|trans }}</button>
+                    <button class="btn btn-primary" type="submit">{{ 'weapon.edt'|trans }}</button>
                 </div>
                 {{ form_end(edit_form) }}
             </div>
@@ -29,9 +221,9 @@
         {% set locale = app.request.locale %}
         {% if locale == 'es' %}
             <span>Español</span>
-            <a href="{{ path('army_edit', { _locale: 'en', 'id':army.id }) }}">English</a>
+            <a href="{{ path('wp_edit', { _locale: 'en', 'id':weapon.id }) }}">English</a>
         {% elseif locale == 'en' %}
-            <a href="{{ path('army_edit', { _locale: 'es', 'id':army.id }) }}">Español</a>
+            <a href="{{ path('wp_edit', { _locale: 'es', 'id':weapon.id }) }}">Español</a>
             <span>English</span>
         {% endif %}
     {% endblock %}

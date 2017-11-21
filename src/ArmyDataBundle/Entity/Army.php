@@ -37,7 +37,7 @@ class Army
 
     /**
      * Many armies has Many Weapons
-     * @ORM\ManyToMany(targetEntity="Weapon",cascade={"persist"}, inversedBy="armies")
+     * @ORM\ManyToMany(targetEntity="Weapon",cascade={"persist"}, fetch="EXTRA_LAZY", inversedBy="armies")
      */
     private $weapons;
 
@@ -130,9 +130,10 @@ class Army
 
     public function addWeapons( \ArmyDataBundle\Entity\Weapon $weapon)
     {
-        $weapon->addArmies($this);
-        $this->weapons->add($weapon);
-
+        if (!$this->weapons->contains($weapon)) {
+            $weapon->addArmies($this);
+            $this->weapons->add($weapon);
+        }
         return $this;
     }
 

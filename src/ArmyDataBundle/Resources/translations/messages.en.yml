@@ -39,4 +39,4 @@ weapon:
     ds: range
     ps: heavy
     rf: rapid fire
-    ar: artillery
+    delMsg: Are you sure you want to dellete this weapon?
