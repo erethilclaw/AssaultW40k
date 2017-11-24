@@ -12,12 +12,23 @@ unit:
     new: new unit
     show: Unit
     edt: edit unit
+    delMsg: Are you sure you want to dellete this unit?
+    ha: WS
+    hp: BS
+    f: S
+    r: T
+    h: W
+    a: A
+    i: I
+    l: Ld
+    s: S
 generic:
     act: actions
     edt: edit
     del: delete
     list: return list
     conf: Are you sure you want delete this item?
+    delMsg: Are you sure you want to dellete this?
 army:
     title: army index
     nam: name army
@@ -25,6 +36,7 @@ army:
     new: new army
     show: Army
     edt: edit army
+    delMsg: Are you sure you want to dellete this army?
 weapon:
     title: weapon index
     nam: name weapon

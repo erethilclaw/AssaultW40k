@@ -92,7 +92,7 @@
                                         <a href=" {{ path('wp_edit', { 'id':weapon.id }) }}"><span
                                                     class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a><br>
                                         <a href="{{ path('wp_delete', { 'id':weapon.id }) }}" onclick="
-return confirm('¿Estas segur que vols eliminar el destinatari?')"><span
+return confirm('{{ 'weapon.delMsg'|trans }}')"><span
                                                     class="glyphicon glyphicon-trash" id="eliminar"></span>{{ 'generic.del'|trans }}</a>
                                     </td>
                                 {% endif %}

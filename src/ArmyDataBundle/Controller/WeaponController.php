@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use ArmyDataBundle\Entity\Weapon;
 
+
 class WeaponController extends Controller
 {
     public function indexAction()
@@ -76,45 +77,80 @@ class WeaponController extends Controller
             $units = $weapon->getUnits();
             $armies = $weapon->getArmies();
             $em = $this->getDoctrine()->getManager();
-            $armyList = $em->getRepository('ArmyDataBundle:Army')->findAll();
+            $armiesList = $em->getRepository('ArmyDataBundle:Army')->findAll();
+            $unitsList = $em->getRepository('ArmyDataBundle:Unit')->findAll();
+            $armyEditList = array();
+            $unitEditList = array();
+
             foreach ($armies as $army) {
                 $armyCollect = $em->getRepository('ArmyDataBundle:Army')->findCollect($army->getId());
-                //         dump($armyCollect[0]->getWeapons());die();
-                //             dump($armyCollect[0]->getWeapons()->contains($weapon));die();
-                //        $armydb = $armyCollect[0];
-                //      dump($armyCollect);die();
-                foreach ($armyCollect as $armydb) {
-                   //       dump($armydb->getWeapons()->contains($weapon));die();
-
-                  //       dump($weapon->getArmies());die();
-                    foreach ($armyList as $armySaved){
-                 //       dump($armydb->getWeapons()->contains($weapon));die();
-                        if ($armySaved->getWeapons()->contains($weapon) && !$armydb>getWeapons()->contains($weapon)) {
-                             var_dump("entra eliminar");die();
-                        }
-                    }
-//                    if (!$armydb->getWeapons()->contains($weapon) && $armyList>getWeapons()->contains($weapon)) {
-//                        var_dump("entra eliminar");
-//                        die();
-//                        $armydb->removeWeapons($weapon);
-//                        $weapon->removeArmies($armydb);
-//                        $em->persist($armydb);
-//                        $em->flush($armydb);
-//                        $em->persist($weapon);
-//                        $em->flush($weapon);
-//                    }
+                array_push($armyEditList, $armyCollect);
+            }
+            //part d'eliminar
+            //Si la array ve buida
+            if (empty($armyEditList)) {
+                foreach ($armiesList as $armyList) {
+                    $armyList->removeWeapons($weapon);
+                    $weapon->removeArmies($armyList);
+                    $em->persist($armyList);
+                    $em->flush($armyList);
+                    $em->persist($weapon);
+                    $em->flush($weapon);
                 }
+            } else {
+                //eliminar en cas no estigui a la llista del formulari per si a la base de dades
+                foreach ($armiesList as $armyList) {
+                    $weaponIsInList = $armyList->getWeapons()->contains($weapon);
+                    if ($weaponIsInList && !$weapon->getArmies()->contains($armyList)) {
+                        $armyList->removeWeapons($weapon);
+                        $weapon->removeArmies($armyList);
+                        $em->persist($armyList);
+                        $em->flush($armyList);
+                        $em->persist($weapon);
+                        $em->flush($weapon);
+                    }
+                }
+            }
+            foreach ($armies as $army){
                 $army->addWeapons($weapon);
                 $em->persist($army);
                 $em->flush($army);
+            }
+
+            foreach ($units as $unit) {
+                $unitCollect = $em->getRepository('ArmyDataBundle:Unit')->findCollect($unit->getId());
+                array_push($unitEditList, $unitCollect);
+            }
+            if (empty($unitEditList)) {
+                foreach ($unitsList as $unitList) {
+                    $unitList->removeWeapons($weapon);
+                    $weapon->removeUnits($unitList);
+                    $em->persist($unitList);
+                    $em->flush($unitList);
+                    $em->persist($weapon);
+                    $em->flush($weapon);
+                }
+            } else {
+                //eliminar en cas no estigui a la llista del formulari per si a la base de dades
+                foreach ($unitsList as $unitList) {
+                    $weaponIsInList = $unitList->getWeapons()->contains($weapon);
+                    if ($weaponIsInList && !$weapon->getUnits()->contains($unitList)) {
+                        $unitList->removeWeapons($weapon);
+                        $weapon->removeUnits($unitList);
+                        $em->persist($unitList);
+                        $em->flush($unitList);
+                        $em->persist($weapon);
+                        $em->flush($weapon);
+                    }
+                }
             }
             foreach ($units as $unit) {
                 $unit->addWeapons($weapon);
                 $em->persist($unit);
                 $em->flush($unit);
             }
-//            $em->persist($weapon);
-//            $em->flush($weapon);
+            $em->persist($weapon);
+            $em->flush($weapon);
             return $this->redirectToRoute('wp_show', array('id' => $weapon->getId()));
         }
 
@@ -125,7 +161,9 @@ class WeaponController extends Controller
         ));
     }
 
-    public function deleteAction(Request $request, Weapon $weapon)
+
+    public
+    function deleteAction(Request $request, Weapon $weapon)
     {
         $form = $this->createDeleteForm($weapon);
         $form->handleRequest($request);

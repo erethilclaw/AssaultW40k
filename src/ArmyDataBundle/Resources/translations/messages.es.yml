@@ -12,12 +12,23 @@ unit:
     new: nueva unidad
     show: Unidad
     edt: Modificar
+    delMsg: ¿Estas seguro que quieres eliminar la unidad?
+    ha: HA
+    hp: HP
+    f: F
+    r: R
+    h: H
+    a: a
+    i: I
+    l: L
+    s: S
 generic:
     act: acciones
     edt: editar
     del: eliminar
     list: volver a lista
     conf: ¿Seguro que quiere eliminar este elemento?
+    delMsg: ¿Estas seguro que quieres eliminar?
 army:
     title: Indice ejercitos
     nam: nombre ejercito
@@ -25,6 +36,7 @@ army:
     new: nuevo ejercito
     show: ejercito
     edt: editar ejercito
+    delMsg: ¿Estas seguro que quieres eliminar el ejercito?
 weapon:
     title: Indice armas
     nam: nombre arma

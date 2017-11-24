@@ -62,7 +62,7 @@
                                         <a href=" {{ path('army_edit', { 'id':army.id }) }}"><span
                                                     class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a><br>
                                         <a href="{{ path('army_delete', { 'id':army.id }) }}" onclick="
-return confirm('¿Estas segur que vols eliminar el destinatari?')"><span
+return confirm('{{ 'army.delMsg'|trans }}')"><span
                                                     class="glyphicon glyphicon-trash" id="eliminar"></span>{{ 'generic.del'|trans }}</a>
                                     </td>
                                 {% endif %}

@@ -9,20 +9,29 @@
                     <a href="{{ path('army_index') }}">{{ 'army.title'|trans }}</a><br>
                 </div>
                 <div class="box-body">
-                    <ul>
-                        {% for unit in army.units %}
-                            <li>
-                                <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    <h4>{{ 'unit.title'|trans }}</h4>
+                        <ul>
+                            {% for unit in army.units %}
+                                <li>
+                                    <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <h4>{{ 'weapon.title'|trans }}</h4>
+                        <ul>
+                            {% for wp in army.weapons %}
+                                <li>
+                                    <a href="{{ path('wp_show', {  'id':wp.id }) }}">{{ wp.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                 </div>
                 <div class="box-footer">
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('army_edit', { 'id':army.id }) }}"><span
                                     class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a> <br>
                         <a href="{{ path('army_delete', { 'id':army.id }) }}" onclick="
-return confirm('¿Estas segur que vols eliminar el destinatari?')">
+                                return confirm('{{ 'army.delMsg'|trans }}')">
                             <button class="btn btn-danger">{{ 'generic.del'|trans }}</button>
                         </a>
                     {% endif %}

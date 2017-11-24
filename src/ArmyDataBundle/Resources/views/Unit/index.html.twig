@@ -44,15 +44,15 @@
                         <thead>
                         <tr>
                             <th><i class="glyphicon glyphicon-user"></i></th>
-                            <th>HA</th>
-                            <th>HP</th>
-                            <th>F</th>
-                            <th>R</th>
-                            <th>H</th>
-                            <th>I</th>
-                            <th>A</th>
-                            <th>L</th>
-                            <th>S</th>
+                            <th>{{ 'unit.ha'|trans }}</th>
+                            <th>{{ 'unit.hp'|trans }}</th>
+                            <th>{{ 'unit.f'|trans }}</th>
+                            <th>{{ 'unit.r'|trans }}</th>
+                            <th>{{ 'unit.h'|trans }}</th>
+                            <th>{{ 'unit.a'|trans }}</th>
+                            <th>{{ 'unit.i'|trans }}</th>
+                            <th>{{ 'unit.l'|trans }}</th>
+                            <th>{{ 'unit.s'|trans }}</th>
                             <th>{{ 'navbar.army'|trans }}</th>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <th><i class="glyphicon glyphicon-wrench"></i>{{ 'generic.act'|trans }}</th>
@@ -101,7 +101,7 @@
                                         <a href=" {{ path('unit_edit', { 'id':unit.id }) }}"><span
                                                     class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a><br>
                                         <a href="{{ path('unit_delete', { 'id':unit.id }) }}" onclick="
-return confirm('¿Estas segur que vols eliminar el destinatari?')"><span
+return confirm('{{ 'unit.delMsg'|trans }}')"><span
                                                     class="glyphicon glyphicon-trash" id="eliminar"></span>{{ 'generic.del'|trans }}</a>
                                     </td>
                                 {% endif %}

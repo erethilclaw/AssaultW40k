@@ -10,4 +10,16 @@ namespace ArmyDataBundle\Repository;
  */
 class UnitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCollect ($unit){
+        $em = $this->getEntityManager();
+
+        $consulta = $em->createQuery('
+            SELECT u, w
+            FROM ArmyDataBundle:Unit u JOIN u.weapons w
+            WHERE u.id = :id
+        ');
+        $consulta->setParameter('id', $unit);
+
+        return $consulta->getResult();
+    }
 }
