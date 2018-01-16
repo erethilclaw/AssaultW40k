@@ -25,13 +25,24 @@
         </div>
         <!-- /.container -->
     {% endblock %}
-    {% block leng %}
-        {% set locale = app.request.locale %}
-        {% if locale == 'es' %}
-            <span>Español</span>
-            <a href="{{ path('army_edit', { _locale: 'en', 'id':army.id }) }}">English</a>
-        {% elseif locale == 'en' %}
-            <a href="{{ path('army_edit', { _locale: 'es', 'id':army.id }) }}">Español</a>
-            <span>English</span>
-        {% endif %}
-    {% endblock %}
+{% block leng %}
+    {% set locale = app.request.locale %}
+    <li class="Button">
+        <a href="{{ path(app.request.attributes.get('_route'), { _locale: 'en', 'id':army.id }) }}">
+            {% if locale == 'en' %}
+                <img src="{{ asset('dist/img/eng_flag.png') }}"/>
+            {% else %}
+                <img src="{{ asset('dist/img/eng_bw_flag.png') }}">
+            {% endif %}
+        </a>
+    </li>
+    <li>
+        <a href="{{ path(app.request.attributes.get('_route'), { _locale: 'es', 'id':army.id  }) }}">
+            {% if locale == 'es' %}
+                <img src="{{ asset('dist/img/es_flag.png') }}">
+            {% else %}
+                <img src="{{ asset('dist/img/es_bw_flag.png') }}">
+            {% endif %}
+        </a>
+    </li>
+{% endblock %}

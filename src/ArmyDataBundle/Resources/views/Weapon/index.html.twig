@@ -105,13 +105,3 @@ return confirm('{{ 'weapon.delMsg'|trans }}')"><span
         </div>
         <!-- /.container -->
     {% endblock %}
-    {% block leng %}
-        {% set locale = app.request.locale %}
-                {% if locale == 'es' %}
-                    <span>Español</span>
-                    <a href="{{ path('wp_index', { _locale: 'en' }) }}">English</a>
-                {% elseif locale == 'en' %}
-                    <a href="{{ path('wp_index', { _locale: 'es' }) }}">Español</a>
-                    <span>English</span>
-                {% endif %}
-    {% endblock %}

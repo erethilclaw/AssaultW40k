@@ -18,16 +18,6 @@
                 "autoWidth": false
             });
         });
-        {#$(document).ready(function() {#}
-        {#$("#eliminar").mousedown(function () {#}
-        {#var checkstr =  confirm('are you sure you want to delete this?');#}
-        {#if(checkstr == true){#}
-        {#{{ path('destinatari_delete', {  'id':destinatari.id }) }}#}
-        {#}else{#}
-        {#return false;#}
-        {#}#}
-        {#});#}
-        {#});#}
 
     </script>
 {% endblock %}
@@ -74,14 +64,4 @@ return confirm('{{ 'army.delMsg'|trans }}')"><span
             </div>
         </div>
         <!-- /.container -->
-    {% endblock %}
-    {% block leng %}
-        {% set locale = app.request.locale %}
-                {% if locale == 'es' %}
-                    <span>Español</span>
-                    <a href="{{ path('army_index', { _locale: 'en' }) }}">English</a>
-                {% elseif locale == 'en' %}
-                    <a href="{{ path('army_index', { _locale: 'es' }) }}">Español</a>
-                    <span>English</span>
-                {% endif %}
     {% endblock %}

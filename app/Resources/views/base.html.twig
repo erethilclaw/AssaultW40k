@@ -58,6 +58,27 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        {% block leng %}
+                            {% set locale = app.request.locale %}
+                            <li class="Button">
+                                <a href="{{ path(app.request.attributes.get('_route'), { _locale: 'en' }) }}">
+                                    {% if locale == 'en' %}
+                                        <img src="{{ asset('dist/img/eng_flag.png') }}"/>
+                                    {% else %}
+                                        <img src="{{ asset('dist/img/eng_bw_flag.png') }}">
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path(app.request.attributes.get('_route'), { _locale: 'es' }) }}">
+                                    {% if locale == 'es' %}
+                                        <img src="{{ asset('dist/img/es_flag.png') }}">
+                                    {% else %}
+                                        <img src="{{ asset('dist/img/es_bw_flag.png') }}">
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endblock %}
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="Button">
                                 <a href="{{ path('logout') }}">
@@ -105,7 +126,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                   Assault W40K
+                    Assault W40K
                 </h1>
                 {#<ol class="breadcrumb">#}
                 {#<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>#}
@@ -127,19 +148,8 @@
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
         <footer class="main-footer">
+
             <!-- To the right -->
-            <div class="pull-right hidden-xs">
-                {% block leng %}
-                {% set locale = app.request.locale %}
-                {% if locale == 'es' %}
-                    <span>Español</span>
-                    <a href="{{ path('site_index', { _locale: 'en' }) }}">English</a>
-                {% elseif locale == 'en' %}
-                    <a href="{{ path('site_index', { _locale: 'es' }) }}">Español</a>
-                    <span>English</span>
-                {% endif %}
-                {% endblock %}
-            </div>
             <!-- Default to the left -->
             <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
         </footer>
@@ -152,30 +162,20 @@
                 <li><a href="#control-user" data-toggle="tab"><i class="fa fa-user"></i></a></li>
             </ul>
             <!-- Tab panes -->
-            <!-- control-perception -->
+
             <div class="tab-content">
+                <li class="dropdown tasks-menu">
+                    <a href="{{ path('site_index', { _locale: 'en' }) }}">
+                        <div class="menu-info">
+                            <h4 class="control-sidebar-subheading">English</h4>
+                        </div>
+                    </a>
+                </li>
                 <div class="tab-pane" id="control-user">
                     <h3 class="control-sidebar-heading">User options</h3>
                     <ul class="control-sidebar-menu">
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li>
-                                <a href="{{ path('logout') }}">
-                                    <i class="menu-icon glyphicon glyphicon-log-out bg-red"></i>
-                                    <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">Logout</h4>
-                                    </div>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="{{ path('login') }}">
-                                    <i class="menu-icon glyphicon glyphicon-log-in bg-red"></i>
-                                    <div class="menu-info">
-                                        <h4 class="control-sidebar-subheading">Login</h4>
-                                    </div>
-                                </a>
-                            </li>
-                        {% endif %}
+
+
                     </ul>
                     <!-- /.control-sidebar-menu -->
                 </div>
@@ -357,6 +357,7 @@
                 </div>
                 <!-- /.tab-pane -->
             </div>
+
         </aside>
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
@@ -382,9 +383,9 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
     {#<script>#}
-        {#$(document).ready(function () {#}
-            {#$('a[href="' + this.location.pathname + '"]').parent().addClass('active');#}
-        {#});#}
+    {#$(document).ready(function () {#}
+    {#$('a[href="' + this.location.pathname + '"]').parent().addClass('active');#}
+    {#});#}
     {#</script>#}
     <script type="text/javascript">
         $(document).ready(function () {
