@@ -9,22 +9,29 @@
                     <a href="{{ path('army_index') }}">{{ 'army.title'|trans }}</a><br>
                 </div>
                 <div class="box-body">
-                    <h4>{{ 'unit.title'|trans }}</h4>
-                        <ul>
-                            {% for unit in army.units %}
-                                <li>
-                                    <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <h4>{{ 'weapon.title'|trans }}</h4>
-                        <ul>
-                            {% for wp in army.weapons %}
-                                <li>
-                                    <a href="{{ path('wp_show', {  'id':wp.id }) }}">{{ wp.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6">
+                            <h4 class="box-body">{{ 'unit.title'|trans }}</h4>
+                            <ul>
+                                {% for unit in army.units %}
+                                    <li>
+                                        <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6 col-sm-6">
+                            <h4 class="box-body">{{ 'weapon.title'|trans }}</h4>
+                            <ul>
+                                {% for wp in army.weapons %}
+                                    <li>
+                                        <a href="{{ path('wp_show', {  'id':wp.id }) }}">{{ wp.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer">
                     {% if is_granted('ROLE_ADMIN') %}

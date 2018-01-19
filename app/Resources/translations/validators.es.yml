@@ -1,0 +1,10 @@
+validation:
+    unit:
+        army: Elije ejercito.
+        weapon: Elije arma.
+    army:
+        name: No puede estar en blanco.
+    weapon:
+        min: No puede ser negativo.
+        max: Demasiado elevado.
+        type: Escoje tipo.

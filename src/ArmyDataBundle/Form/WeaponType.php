@@ -29,6 +29,7 @@ class WeaponType extends AbstractType
             ->add('f', ChoiceType::class, array('choices' => range(0, 10)))
             ->add('fp', ChoiceType::class, array('choices' => range(0, 10)))
             ->add('type', ChoiceType::class, array('choices' => array(
+                'generic.choose'=> 'blank',
                 'weapon.as' => 'Asalto',
                 'weapon.ps' => 'Pesada',
                 'weapon.rf' => 'Fuego Rapido',

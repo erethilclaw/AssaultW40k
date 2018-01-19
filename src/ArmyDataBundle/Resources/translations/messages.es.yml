@@ -29,9 +29,10 @@ generic:
     list: volver a lista
     conf: ¿Seguro que quiere eliminar este elemento?
     delMsg: ¿Estas seguro que quieres eliminar?
+    choose: Elije opción
 army:
     title: Indice ejercitos
-    nam: nombre ejercito
+    nam: ejercito
     add: añadir ejercito
     new: nuevo ejercito
     show: ejercito
@@ -53,3 +54,4 @@ weapon:
     rf: fuego rapido
     ar: artilleria
     delMsg: ¿Estas seguro que quieres eliminar esta arma?
+validation.unit.army: Elije ejercito

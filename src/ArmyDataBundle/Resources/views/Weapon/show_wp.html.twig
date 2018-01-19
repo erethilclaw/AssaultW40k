@@ -11,36 +11,36 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12">
-                        <table id="example2" class="table table-bordered table-hover table-striped">
-                            <thead>
-                            <tr>
-                                <th>range</th>
-                                <th>F</th>
-                                <th>FP</th>
-                                <th>Type</th>
-                                <th>Shoots</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    {{ weapon.distance }}
-                                </td>
-                                <td>
-                                    {{ weapon.f }}
-                                </td>
-                                <td>
-                                    {{ weapon.fp }}
-                                </td>
-                                <td>
-                                    {{ weapon.type }}
-                                </td>
-                                <td>
-                                    {{ weapon.shoots }}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <table id="example2" class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>range</th>
+                                    <th>F</th>
+                                    <th>FP</th>
+                                    <th>Type</th>
+                                    <th>Shoots</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {{ weapon.distance }}
+                                    </td>
+                                    <td>
+                                        {{ weapon.f }}
+                                    </td>
+                                    <td>
+                                        {{ weapon.fp }}
+                                    </td>
+                                    <td>
+                                        {{ weapon.type }}
+                                    </td>
+                                    <td>
+                                        {{ weapon.shoots }}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-6">
                             <h4 class="box-body">{{ 'army.title'|trans }}</h4>
@@ -62,20 +62,20 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                        </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('wp_edit', { 'id':weapon.id }) }}"><span
-                                    class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a> <br>
-                        <a href="{{ path('wp_delete', { 'id':weapon.id }) }}" onclick="
-return confirm('{{ 'weapon.delMsg'|trans }}')">
-                            <button class="btn btn-danger">{{ 'generic.del'|trans }}</button>
-                        </a>
-                    {% endif %}
-                </div>
             </div>
+            <div class="box-footer">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('wp_edit', { 'id':weapon.id }) }}"><span
+                                class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a> <br>
+                    <a href="{{ path('wp_delete', { 'id':weapon.id }) }}" onclick="
+                            return confirm('{{ 'weapon.delMsg'|trans }}')">
+                        <button class="btn btn-danger">{{ 'generic.del'|trans }}</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
         </div>
 
         <!-- /.container -->

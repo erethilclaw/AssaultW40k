@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="unit")
  * @ORM\Entity(repositoryClass="ArmyDataBundle\Repository\UnitRepository")
+ * @UniqueEntity("name")
  */
 class Unit
 {
@@ -27,7 +28,7 @@ class Unit
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -98,12 +99,14 @@ class Unit
      * Many Units have one Army
      * @ORM\ManyToOne(targetEntity="ArmyDataBundle\Entity\Army", inversedBy="units")
      * @ORM\JoinColumn(name="army_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="validation.unit.army")
      */
     private $army;
 
     /**
      * many units has Many Weapons
      * @ORM\ManyToMany(targetEntity="Weapon", cascade={"persist"},fetch="EXTRA_LAZY", inversedBy="units")
+     * @Assert\NotBlank(message="validation.unit.weapon")
      */
     private $weapons;
 

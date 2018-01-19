@@ -32,12 +32,12 @@ class UnitType extends AbstractType
             ->add('a', ChoiceType::class, array ('choices' => range(0,10)))
             ->add('l', ChoiceType::class, array ('choices' => range(0,10)))
             ->add('s', ChoiceType::class, array ('choices' => array(
-                '1' => 1,
-                '2' => 2,
-                '3' => 3,
-                '4' => 4,
-                '5' => 5,
-                '6' => 6)))
+                '1+' => 1,
+                '2+' => 2,
+                '3+' => 3,
+                '4+' => 4,
+                '5+' => 5,
+                '6+' => 6)))
             ->add('army', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'required' => false,
                 'class' => 'ArmyDataBundle\Entity\Army',

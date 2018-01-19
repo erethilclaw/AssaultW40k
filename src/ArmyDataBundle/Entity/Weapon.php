@@ -4,11 +4,14 @@ namespace ArmyDataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Weapon
  *
  * @ORM\Table(name="weapon")
  * @ORM\Entity(repositoryClass="ArmyDataBundle\Repository\WeaponRepository")
+ * @UniqueEntity("name")
  */
 class Weapon
 {
@@ -25,6 +28,7 @@ class Weapon
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,6 +36,12 @@ class Weapon
      * @var int
      *
      * @ORM\Column(name="distance", type="integer")
+     * @Assert\Range(
+     *     min = 0,
+     *     max= 120,
+     *     minMessage="validation.weapon.min",
+     *     maxMessage="validation.weapon.max"
+     * )
      */
     private $distance;
 
@@ -53,6 +63,8 @@ class Weapon
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
+     * @Assert\Choice({"Asalto","Pesada","Fuego Rapido","Artilleria"},
+     *     message="validation.weapon.type")
      */
     private $type;
 
@@ -60,6 +72,12 @@ class Weapon
      * @var int
      *
      * @ORM\Column(name="shoots", type="integer")
+     * @Assert\Range(
+     *     min = 0,
+     *     max= 120,
+     *     minMessage="validation.weapon.min",
+     *     maxMessage="validation.weapon.max"
+     * )
      */
     private $shoots;
 

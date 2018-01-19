@@ -73,94 +73,93 @@
     </script>
 {% endblock %}
     {% block page_content %}
-        <!-- Page Content -->
-        <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">{{ 'unit.new'|trans }}</h3><br>
-                    <a href="{{ path('unit_index') }}">{{ 'generic.list'|trans }}</a>
+<!-- Page Content -->
+<div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ 'unit.new'|trans }}</h3><br>
+            <a href="{{ path('unit_index') }}">{{ 'generic.list'|trans }}</a>
+        </div>
+        {{ form_start(form,{'attr': {'role': 'form'}}) }}
+        {{ form_errors(form) }}
+        <div class="box-body">
+            <div class="form-group ">
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="row">
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.ha) }}
+                    {{ form_errors(form.ha) }}
+                    {{ form_widget(form.ha, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                {{ form_start(form,{'attr': {'role': 'form'}}) }}
-                {{ form_errors(form) }}
-                <div class="box-body">
-                    <div class="form-group ">
-                        {{ form_label(form.name) }}
-                        {{ form_errors(form.name) }}
-                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="row">
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.ha) }}
-                            {{ form_errors(form.ha) }}
-                            {{ form_widget(form.ha, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.hp) }}
-                            {{ form_errors(form.hp) }}
-                            {{ form_widget(form.hp, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.f) }}
-                            {{ form_errors(form.f) }}
-                            {{ form_widget(form.f, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.r) }}
-                            {{ form_errors(form.r) }}
-                            {{ form_widget(form.r, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.h) }}
-                            {{ form_errors(form.h) }}
-                            {{ form_widget(form.h, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.i) }}
-                            {{ form_errors(form.i) }}
-                            {{ form_widget(form.i, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.a) }}
-                            {{ form_errors(form.a) }}
-                            {{ form_widget(form.a, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.l) }}
-                            {{ form_errors(form.l) }}
-                            {{ form_widget(form.l, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.s) }}
-                            {{ form_errors(form.s) }}
-                            {{ form_widget(form.s, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
-                            {{ form_label(form.army) }}
-                            {{ form_errors(form.army) }}
-                            {{ form_widget(form.army, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <label>{{ 'weapon.add'|trans }}</label>
-                            {{ form_label(form.weapons) }}
-                            <ul class="weapons"
-                                data-prototype="{{ form_widget(form.weapons.vars.prototype)|e }}">
-                                {# iterate over each existing tag and render its only field: name #}
-                                {% for weapon in form.weapons %}
-                                    <li>
-                                        {{ form_errors(weapon) }}
-                                        {{ form_widget(weapon) }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.hp) }}
+                    {{ form_errors(form.hp) }}
+                    {{ form_widget(form.hp, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <div class="box-footer">
-                    <button class="btn btn-primary" type="submit">{{ 'unit.add'|trans }}</button>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.f) }}
+                    {{ form_errors(form.f) }}
+                    {{ form_widget(form.f, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                {{ form_end(form) }}
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.r) }}
+                    {{ form_errors(form.r) }}
+                    {{ form_widget(form.r, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.h) }}
+                    {{ form_errors(form.h) }}
+                    {{ form_widget(form.h, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.i) }}
+                    {{ form_errors(form.i) }}
+                    {{ form_widget(form.i, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.a) }}
+                    {{ form_errors(form.a) }}
+                    {{ form_widget(form.a, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.l) }}
+                    {{ form_errors(form.l) }}
+                    {{ form_widget(form.l, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.s) }}
+                    {{ form_errors(form.s) }}
+                    {{ form_widget(form.s, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
+                    {{ form_label(form.army) }}
+                    {{ form_errors(form.army) }}
+                    {{ form_widget(form.army, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                    <label>{{ 'weapon.add'|trans }}</label>
+                    {{ form_label(form.weapons) }}
+                    <ul class="weapons"
+                        data-prototype="{{ form_widget(form.weapons.vars.prototype)|e }}">
+                        {# iterate over each existing tag and render its only field: name #}
+                        {% for weapon in form.weapons %}
+                            <li>
+                                {{ form_errors(weapon) }}
+                                {{ form_widget(weapon) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
-        <!-- /.container -->
-    {% endblock %}
-
+        <div class="box-footer">
+            <button class="btn btn-primary" type="submit">{{ 'unit.add'|trans }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+<!-- /.container -->
+{% endblock %}

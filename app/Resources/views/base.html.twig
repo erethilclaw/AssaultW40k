@@ -7,6 +7,8 @@
           name="viewport">
     <title>{% block title %}Welcome to AssaultW40k{% endblock %}</title>
     {% block stylesheets %}
+        <!-- custom css -->
+        {#<link href="{{ asset('css/assaultw40k.css') }}" rel="stylesheet">#}
         <!-- Bootstrap Core CSS -->
         <link href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css') }}"
               rel="stylesheet">
@@ -397,5 +399,6 @@
         });
     </script>
 {% endblock %}
+
 </body>
 </html>

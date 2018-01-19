@@ -4,12 +4,14 @@ namespace ArmyDataBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Army
  *
  * @ORM\Table(name="army")
  * @ORM\Entity(repositoryClass="ArmyDataBundle\Repository\ArmyRepository")
+ * @UniqueEntity("name")
  */
 class Army
 {
@@ -26,6 +28,7 @@ class Army
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 

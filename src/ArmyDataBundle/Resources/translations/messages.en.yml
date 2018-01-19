@@ -29,9 +29,10 @@ generic:
     list: return list
     conf: Are you sure you want delete this item?
     delMsg: Are you sure you want to dellete this?
+    choose: Choose option
 army:
     title: army index
-    nam: name army
+    nam: army
     add: add army
     new: new army
     show: Army
@@ -51,4 +52,6 @@ weapon:
     ds: range
     ps: heavy
     rf: rapid fire
+    ar: artillery
     delMsg: Are you sure you want to dellete this weapon?
+validation.unit.army: Choice army

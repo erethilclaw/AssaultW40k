@@ -1,0 +1,10 @@
+validation:
+    unit:
+        army: Choice army.
+        weapon: Choice weapon.
+    army:
+        empty: Can't be blank.
+    weapon:
+        min: Can't be negative.
+        max: Too high.
+        type: Choose type.
