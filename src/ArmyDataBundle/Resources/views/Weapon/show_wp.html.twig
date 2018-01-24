@@ -64,20 +64,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="box-footer">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('wp_edit', { 'id':weapon.id }) }}"><span
-                                class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a> <br>
-                    <a href="{{ path('wp_delete', { 'id':weapon.id }) }}" onclick="
-                            return confirm('{{ 'weapon.delMsg'|trans }}')">
-                        <button class="btn btn-danger">{{ 'generic.del'|trans }}</button>
-                    </a>
-                {% endif %}
+                <div class="box-footer">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('wp_edit', { 'id':weapon.id }) }}"><span
+                                    class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a> <br>
+                        <a href="{{ path('wp_delete', { 'id':weapon.id }) }}" onclick="
+                                return confirm('{{ 'weapon.delMsg'|trans }}')">
+                            <button class="btn btn-danger">{{ 'generic.del'|trans }}</button>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-        </div>
-
         <!-- /.container -->
     {% endblock %}
 {% block leng %}

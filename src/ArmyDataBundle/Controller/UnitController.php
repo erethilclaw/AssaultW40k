@@ -2,6 +2,7 @@
 
 namespace ArmyDataBundle\Controller;
 
+use ArmyDataBundle\Entity\Army;
 use ArmyDataBundle\Form\UnitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +42,6 @@ class UnitController extends Controller
     public function showAction(Unit $unit)
     {
         $deleteForm = $this->createDeleteForm($unit);
-
         return $this->render('@ArmyData/Unit/show_unit.html.twig', array(
             'unit' => $unit,
             'delete_form' => $deleteForm->createView(),

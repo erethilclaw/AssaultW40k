@@ -31,12 +31,12 @@ generic:
     delMsg: Are you sure you want to dellete this?
     choose: Choose option
 army:
-    title: army index
-    nam: army
-    add: add army
-    new: new army
+    title: Army index
+    nam: Army
+    add: Add army
+    new: New army
     show: Army
-    edt: edit army
+    edt: Edit army
     delMsg: Are you sure you want to dellete this army?
 weapon:
     title: weapon index

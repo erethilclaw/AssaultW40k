@@ -79,12 +79,12 @@
                                 </td>
                                 <td>
                                     {% for unit in weapon.units %}
-                                        <ul>{{ unit.name }}</ul>
+                                        <a href="{{ path('unit_show', {'id':unit.id}) }}">{{ unit.name }}</a><br>
                                     {% endfor %}
                                 </td>
                                 <td>
                                     {% for army in weapon.armies %}
-                                        <ul>{{ army.name }}</ul>
+                                        <a href="{{ path('army_show', {'id':army.id}) }}">{{ army.name }}</a><br>
                                         {% endfor %}
                                 </td>
                                 {% if is_granted('ROLE_ADMIN') %}

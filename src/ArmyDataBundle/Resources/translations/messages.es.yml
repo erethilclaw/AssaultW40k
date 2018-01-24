@@ -32,10 +32,10 @@ generic:
     choose: Elije opción
 army:
     title: Indice ejercitos
-    nam: ejercito
-    add: añadir ejercito
-    new: nuevo ejercito
-    show: ejercito
+    nam: Ejercito
+    add: Añadir ejercito
+    new: Nuevo ejercito
+    show: Ejercito
     edt: editar ejercito
     delMsg: ¿Estas seguro que quieres eliminar el ejercito?
 weapon:
