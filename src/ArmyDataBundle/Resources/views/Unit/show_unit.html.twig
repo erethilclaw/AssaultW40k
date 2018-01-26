@@ -9,7 +9,7 @@
                     <a href="{{ path('unit_index') }}">{{ 'unit.title'|trans }}</a><br>
                 </div>
                 <div class="box-body">
-                    <h4 class="box-body">{{ 'army.nam'|trans }} : {{ unit.army }}</h4>
+                    <h4 class="box-body">{{ 'army.nam'|trans }} : <a href="{{ path('army_show', {'id': unit.army.id}) }}">{{ unit.army }}</a></h4>
                     <table id="example2" class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>

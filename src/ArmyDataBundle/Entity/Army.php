@@ -44,6 +44,11 @@ class Army
      */
     private $weapons;
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     */
+    private $image;
 
     public function __construct()
     {
@@ -130,6 +135,24 @@ class Army
     {
         return $this->weapons;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+
 
     public function addWeapons( \ArmyDataBundle\Entity\Weapon $weapon)
     {
