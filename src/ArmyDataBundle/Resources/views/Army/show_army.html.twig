@@ -7,7 +7,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ army.name }}</h3><br>
                     <a href="{{ path('army_index') }}">{{ 'army.title'|trans }}</a><br>
-                    <img src={{ asset('uploads/army/' ~ army.image) }}>
+                    <img style="max-width: 128px" src={{ asset('uploads/army/' ~ army.image) }}>
                 </div>
                 <div class="box-body">
                     <div class="row">

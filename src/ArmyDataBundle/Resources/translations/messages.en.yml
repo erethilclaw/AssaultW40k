@@ -30,6 +30,7 @@ generic:
     conf: Are you sure you want delete this item?
     delMsg: Are you sure you want to dellete this?
     choose: Choose option
+    current_img: Current image
 army:
     title: Army index
     nam: Army
