@@ -14,13 +14,13 @@ class ArmyController extends Controller
     public function indexAction()
     {
         $armies = $this->getDoctrine()->getRepository('ArmyDataBundle:Army')->findAll();
-        return $this->render('ArmyDataBundle:Army:index.html.twig',array('armies' => $armies));
+        return $this->render('ArmyDataBundle:Army:index.html.twig', array('armies' => $armies));
     }
 
     public function addAction(Request $request)
     {
         $army = new Army();
-        $form = $this->createForm('ArmyDataBundle\Form\ArmyType' , $army);
+        $form = $this->createForm('ArmyDataBundle\Form\ArmyType', $army);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -29,10 +29,10 @@ class ArmyController extends Controller
             $file = $army->getImage();
 
             // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             // Move the file to the directory where brochures are stored
-            $imgRoute = $this->container->getParameter('kernel.root_dir').'/../web/uploads/army';
+            $imgRoute = $this->container->getParameter('army_directory');
             $file->move(
                 $imgRoute,
                 $fileName
@@ -48,7 +48,7 @@ class ArmyController extends Controller
             $em->persist($army);
             $em->flush($army);
 
-          return $this->redirectToRoute('army_show', array('id' => $army->getId()));
+            return $this->redirectToRoute('army_show', array('id' => $army->getId()));
         }
 
         return $this->render('@ArmyData/Army/add_army.html.twig', array(
@@ -72,37 +72,42 @@ class ArmyController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('army_delete', array('id' => $army->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
 
     public function editAction(Request $request, Army $army)
     {
-        $imgRoute = $this->container->getParameter('kernel.root_dir').'/../web/uploads/army';
-        $army->setImage(new File($imgRoute.'/'.$army->getImage()));
+        $army->setImage(new File($this->getParameter('army_directory') . '/' . $army->getImage()));
+        $imgOri = basename($army->getImage());
         $deleteForm = $this->createDeleteForm($army);
-        $editForm = $this->createForm( 'ArmyDataBundle\Form\ArmyType',$army);
-
+        $editForm = $this->createForm('ArmyDataBundle\Form\ArmyType', $army);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $army->getImage();
 
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            if ($army->getImage()) {
+                // $file stores the uploaded PDF file
+                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+                $file = $army->getImage();
 
-            // Move the file to the directory where brochures are stored
-            $imgRoute = $this->container->getParameter('kernel.root_dir').'/../web/uploads/army';
-            $file->move(
-                $imgRoute,
-                $fileName
-            );
+                // Generate a unique name for the file before saving it
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            // Update the 'brochure' property to store the PDF file name
-            // instead of its contents
-            $army->setImage($fileName);
+                // Move the file to the directory where brochures are stored
+                $imgRoute = $this->container->getParameter('army_directory');
+                $file->move(
+                    $imgRoute,
+                    $fileName
+                );
+
+                // Update the 'brochure' property to store the PDF file name
+                // instead of its contents
+                $army->setImage($fileName);
+            } else {
+
+                $army->setImage($imgOri);
+            }
+
 
             // ... persist the $product variable or any other work
             $this->getDoctrine()->getManager()->persist($army);
@@ -118,20 +123,21 @@ class ArmyController extends Controller
         ));
     }
 
-    public function deleteAction(Request $request, Army $army)
-    {
-        $form = $this->createDeleteForm($army);
-        $form->handleRequest($request);
+public
+function deleteAction(Request $request, Army $army)
+{
+    $form = $this->createDeleteForm($army);
+    $form->handleRequest($request);
 
-        if (!$army){
-            throw $this->createNotFoundException("Destinatari no trobat");
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($army);
-        $em->flush($army);
-
-
-        return $this->redirectToRoute('army_index');
+    if (!$army) {
+        throw $this->createNotFoundException("Destinatari no trobat");
     }
+
+    $em = $this->getDoctrine()->getManager();
+    $em->remove($army);
+    $em->flush($army);
+
+
+    return $this->redirectToRoute('army_index');
+}
 }
