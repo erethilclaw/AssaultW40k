@@ -24,25 +24,19 @@ class ArmyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $army->getImage();
-
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-            // Move the file to the directory where brochures are stored
-            $imgRoute = $this->container->getParameter('army_directory');
-            $file->move(
-                $imgRoute,
-                $fileName
-            );
-
-            // Update the 'brochure' property to store the PDF file name
-            // instead of its contents
-            $army->setImage($fileName);
-
-            // ... persist the $product variable or any other work
+            if ($army->getImage()) {
+                $file = $army->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $imgRoute = $this->container->getParameter('army_directory');
+                $file->move(
+                    $imgRoute,
+                    $fileName
+                );
+                $army->setImage($fileName);
+            } else {
+                //in case there is no image puts one by default
+                $army->setImage("giphy.gif");
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($army);
@@ -86,30 +80,17 @@ class ArmyController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
             if ($army->getImage()) {
-                // $file stores the uploaded PDF file
-                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
                 $file = $army->getImage();
-
-                // Generate a unique name for the file before saving it
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-                // Move the file to the directory where brochures are stored
                 $imgRoute = $this->container->getParameter('army_directory');
                 $file->move(
                     $imgRoute,
                     $fileName
                 );
-
-                // Update the 'brochure' property to store the PDF file name
-                // instead of its contents
                 $army->setImage($fileName);
             } else {
-
                 $army->setImage($imgOri);
             }
-
-
-            // ... persist the $product variable or any other work
             $this->getDoctrine()->getManager()->persist($army);
             $this->getDoctrine()->getManager()->flush($army);
 
@@ -123,21 +104,20 @@ class ArmyController extends Controller
         ));
     }
 
-public
-function deleteAction(Request $request, Army $army)
-{
-    $form = $this->createDeleteForm($army);
-    $form->handleRequest($request);
-
-    if (!$army) {
-        throw $this->createNotFoundException("Destinatari no trobat");
+    public function deleteAction(Request $request, Army $army)
+    {
+       $imgDel = new File($this->getParameter('army_directory') . '/' . $army->getImage());
+        $form = $this->createDeleteForm($army);
+        $form->handleRequest($request);
+        if (!$army) {
+            throw $this->createNotFoundException("Destinatari no trobat");
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($army);
+        $em->flush($army);
+        if (basename($imgDel) != 'giphy.gif'){
+            unlink($imgDel);
+        }
+        return $this->redirectToRoute('army_index');
     }
-
-    $em = $this->getDoctrine()->getManager();
-    $em->remove($army);
-    $em->flush($army);
-
-
-    return $this->redirectToRoute('army_index');
-}
 }

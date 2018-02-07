@@ -22,7 +22,7 @@ class ArmyType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array('label' => 'army.nam'))
-            ->add('image', FileType::class, array('label' => 'Image'));
+            ->add('image', FileType::class, array('label' => 'Image','required' => false));
     }
 
     public function configureOptions(OptionsResolver $resolver)
