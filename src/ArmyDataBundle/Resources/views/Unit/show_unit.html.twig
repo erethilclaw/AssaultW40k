@@ -7,6 +7,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ 'unit.show'|trans }}</h3><br>
                     <a href="{{ path('unit_index') }}">{{ 'unit.title'|trans }}</a><br>
+                    <img style="max-width: 128px" src={{ asset('uploads/unit/' ~ unit.image) }}>
                 </div>
                 <div class="box-body">
                     <h4 class="box-body">{{ 'army.nam'|trans }} : <a href="{{ path('army_show', {'id': unit.army.id}) }}">{{ unit.army }}</a></h4>

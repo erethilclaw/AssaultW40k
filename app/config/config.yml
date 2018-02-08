@@ -9,6 +9,8 @@ imports:
 parameters:
     locale: en
     army_directory: '%kernel.project_dir%/web/uploads/army'
+    unit_directory: '%kernel.project_dir%/web/uploads/unit'
+    weapon_directory: '%kernel.project_dir%/web/uploads/weapon'
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }

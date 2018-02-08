@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use ArmyDataBundle\Entity\Unit;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -54,7 +55,9 @@ class UnitType extends AbstractType
                 'allow_delete' => true,
                 'allow_extra_fields' => true,
                 'by_reference' => false,
-            ]);
+            ])
+            ->add('image', FileType::class, array('label' => 'Image','required' => false))
+        ;
         ;
     }
 

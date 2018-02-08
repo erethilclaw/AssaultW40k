@@ -96,6 +96,28 @@ class Unit
     private $s;
 
     /**
+     * @ORM\Column(type="string")
+     *
+     */
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
      * Many Units have one Army
      * @ORM\ManyToOne(targetEntity="ArmyDataBundle\Entity\Army", inversedBy="units")
      * @ORM\JoinColumn(name="army_id", referencedColumnName="id")
