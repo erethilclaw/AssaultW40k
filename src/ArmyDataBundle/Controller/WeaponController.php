@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use ArmyDataBundle\Entity\Weapon;
-
+use Symfony\Component\HttpFoundation\File\File;
 
 class WeaponController extends Controller
 {
@@ -24,6 +24,19 @@ class WeaponController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($weapon->getImage()) {
+                $file = $weapon->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $imgRoute = $this->container->getParameter('weapon_directory');
+                $file->move(
+                    $imgRoute,
+                    $fileName
+                );
+                $weapon->setImage($fileName);
+            } else {
+                //in case there is no image puts one by default
+                $weapon->setImage("giphy.gif");
+            }
             $units = $weapon->getUnits();
             $armies = $weapon->getArmies();
             $em = $this->getDoctrine()->getManager();
@@ -69,11 +82,25 @@ class WeaponController extends Controller
 
     public function editAction(Request $request, Weapon $weapon)
     {
+        $weapon->setImage(new File($this->getParameter('unit_directory') . '/' . $weapon->getImage()));
+        $imgOri = basename($weapon->getImage());
         $deleteForm = $this->createDeleteForm($weapon);
         $editForm = $this->createForm('ArmyDataBundle\Form\WeaponType', $weapon);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if ($weapon->getImage()) {
+                $file = $weapon->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $imgRoute = $this->container->getParameter('weapon_directory');
+                $file->move(
+                    $imgRoute,
+                    $fileName
+                );
+                $weapon->setImage($fileName);
+            } else {
+                $weapon->setImage($imgOri);
+            }
             $units = $weapon->getUnits();
             $armies = $weapon->getArmies();
             $em = $this->getDoctrine()->getManager();
@@ -111,7 +138,7 @@ class WeaponController extends Controller
                     }
                 }
             }
-            foreach ($armies as $army){
+            foreach ($armies as $army) {
                 $army->addWeapons($weapon);
                 $em->persist($army);
                 $em->flush($army);
@@ -165,6 +192,7 @@ class WeaponController extends Controller
     public
     function deleteAction(Request $request, Weapon $weapon)
     {
+        $imgDel = new File($this->getParameter('weapon_directory') . '/' . $weapon->getImage());
         $form = $this->createDeleteForm($weapon);
         $form->handleRequest($request);
         if (!$weapon) {
@@ -173,6 +201,10 @@ class WeaponController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($weapon);
         $em->flush($weapon);
+
+        if (basename($imgDel) != 'giphy.gif'){
+            unlink($imgDel);
+        }
 
         return $this->redirectToRoute('wp_index');
     }

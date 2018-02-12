@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class WeaponType extends AbstractType
@@ -29,16 +29,16 @@ class WeaponType extends AbstractType
             ->add('f', ChoiceType::class, array('choices' => range(0, 10)))
             ->add('fp', ChoiceType::class, array('choices' => range(0, 10)))
             ->add('type', ChoiceType::class, array('choices' => array(
-                'generic.choose'=> 'blank',
+                'generic.choose' => 'blank',
                 'weapon.as' => 'Asalto',
                 'weapon.ps' => 'Pesada',
                 'weapon.rf' => 'Fuego Rapido',
                 'weapon.ar' => 'Artilleria',
-                ),'label'=> 'weapon.tp'
-                ))
-            ->add('shoots', IntegerType::class, array (
-                'label'=> 'weapon.st'
-                ))
+            ), 'label' => 'weapon.tp'
+            ))
+            ->add('shoots', IntegerType::class, array(
+                'label' => 'weapon.st'
+            ))
             ->add('armies', CollectionType::class, [
                 'entry_type' => EntityType::class,
                 'entry_options' => [
@@ -61,13 +61,13 @@ class WeaponType extends AbstractType
                 'allow_extra_fields' => true,
                 'by_reference' => false,
             ])
-        ;
+            ->add('image', FileType::class, array('label' => 'Image', 'required' => false));;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ArmyDataBundle\Entity\Weapon' ,
+            'data_class' => 'ArmyDataBundle\Entity\Weapon',
         ));
     }
 

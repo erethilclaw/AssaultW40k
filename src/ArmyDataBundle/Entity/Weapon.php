@@ -93,6 +93,28 @@ class Weapon
      */
     private $units;
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     */
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
     public function __construct()
     {
         $this->armies = new \Doctrine\Common\Collections\ArrayCollection();

@@ -7,6 +7,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ weapon.name }}</h3><br>
                     <a href="{{ path('wp_index') }}">{{ 'weapon.title'|trans }}</a><br>
+                    <img style="max-width: 128px" src={{ asset('uploads/weapon/' ~ weapon.image) }}>
                 </div>
                 <div class="box-body">
                     <div class="row">
