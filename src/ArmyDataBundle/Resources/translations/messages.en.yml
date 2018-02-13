@@ -31,6 +31,9 @@ generic:
     delMsg: Are you sure you want to dellete this?
     choose: Choose option
     current_img: Current image
+    show: Show
+    entries: entries
+    search: Search
 army:
     title: Army index
     nam: Army
