@@ -31,9 +31,18 @@ generic:
     delMsg: ¿Estas seguro que quieres eliminar?
     choose: Elije opción.
     current_img: Imagen actual
+dataTable:
     show: Mostrar
     entries: entradas
     search: Búsqueda
+    zeroRecords: Nada encontrado - lo siento
+    infoFiltered: filtrada de
+    info: Mostrando pagina
+    of: de
+    sFirst: Primero
+    sLast: Último
+    sNext: Siguiente
+    sPrevious: Anterior
 army:
     title: Indice ejercitos
     nam: Ejercito

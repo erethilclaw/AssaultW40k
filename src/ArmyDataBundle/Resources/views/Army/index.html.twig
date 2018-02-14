@@ -8,17 +8,23 @@
     <!-- page script -->
     <script>
         $(function () {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
+            $("#example1").DataTable({
+                "language": {
+                    "oPaginate": {
+                        "sFirst":    "{{ 'dataTable.sFirst'|trans }}",
+                        "sLast":     "{{ 'dataTable.sLast'|trans }}",
+                        "sNext":     "{{ 'dataTable.sNext'|trans }}",
+                        "sPrevious": "{{ 'dataTable.sPrevious'|trans }}"
+                    },
+                    "lengthMenu": "{{ 'dataTable.show'|trans }} _MENU_ {{ 'dataTable.entries'|trans }}",
+                    "sSearch":         "{{ 'dataTable.search'|trans }}",
+                    "zeroRecords": "{{ 'dataTable.zeroRecords'|trans }}",
+                    "info": "{{ 'dataTable.info'|trans }} _PAGE_ {{ 'dataTable.of'|trans }} _PAGES_",
+                    "infoEmpty": "{{ 'dataTable.zeroRecords'|trans }}",
+                    "infoFiltered": "({{ 'dataTable.infoFiltered'|trans }} _MAX_ {{ 'dataTable.entries'|trans }})"
+                }
             });
         });
-
     </script>
 {% endblock %}
     {% block page_content %}
@@ -30,43 +36,48 @@
                     <a href="{{ path('army_add') }}">{{ 'army.add'|trans }}</a>
                 </div>
                 <div class="box-body">
-                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                            <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="soting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" style="width: 250px">
-                                                <i class="glyphicon glyphicon-user"></i>{{ 'army.title'|trans }}
-                                            </th>
-                                            {% if is_granted('ROLE_ADMIN') %}
-                                                <th class="soting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: active to sort column descending" style="width: 250px"><i class="glyphicon glyphicon-wrench"></i>{{ 'generic.act'|trans }}</th>
-                                            {% endif %}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for army in armies %}
-                                    <tr class="odd" role="row">
-                                        <td class="sorting_1">
-                                            <a href="{{ path('army_show', {  'id':army.id }) }}">{{ army.name }}</a>
-                                        </td>
-                                        {% if is_granted('ROLE_ADMIN') %}
-                                            <td>
-                                                <a href=" {{ path('army_edit', { 'id':army.id }) }}"><span
-                                                            class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}</a><br>
-                                                <a href="{{ path('army_delete', { 'id':army.id }) }}" onclick="
-                                                        return confirm('{{ 'army.delMsg'|trans }}')"><span
-                                                            class="glyphicon glyphicon-trash" id="eliminar"></span>{{ 'generic.del'|trans }}</a>
-                                            </td>
-                                        {% endif %}
-                                    </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                           aria-describedby="example1_info">
+                        <thead>
+                        <tr role="row">
+                            <th class="soting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-sort="ascending" aria-label="Rendering engine: active to sort column descending"
+                                style="width: 250px">
+                                <i class="glyphicon glyphicon-user"></i>{{ 'army.title'|trans }}
+                            </th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th class="soting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-sort="ascending"
+                                    aria-label="Rendering engine: active to sort column descending"
+                                    style="width: 250px"><i
+                                            class="glyphicon glyphicon-wrench"></i>{{ 'generic.act'|trans }}</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for army in armies %}
+                            <tr class="odd" role="row">
+                                <td class="sorting_1">
+                                    <a href="{{ path('army_show', {  'id':army.id }) }}">{{ army.name }}</a>
+                                </td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td>
+                                        <a href=" {{ path('army_edit', { 'id':army.id }) }}"><span
+                                                    class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}
+                                        </a><br>
+                                        <a href="{{ path('army_delete', { 'id':army.id }) }}" onclick="
+                                                return confirm('{{ 'army.delMsg'|trans }}')"><span
+                                                    class="glyphicon glyphicon-trash"
+                                                    id="eliminar"></span>{{ 'generic.del'|trans }}</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
         </div>
         <!-- /.container -->
     {% endblock %}

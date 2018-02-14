@@ -31,9 +31,18 @@ generic:
     delMsg: Are you sure you want to dellete this?
     choose: Choose option
     current_img: Current image
+dataTable:
     show: Show
     entries: entries
     search: Search
+    zeroRecords: Nothing found - sorry
+    infoFiltered: filtered from
+    info: Showing page
+    of: of
+    sFirst: First
+    sLast:  Last
+    sNext: Next
+    sPrevious: Previous
 army:
     title: Army index
     nam: Army

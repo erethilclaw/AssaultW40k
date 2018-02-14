@@ -8,17 +8,23 @@
     <!-- page script -->
     <script>
         $(function () {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
+            $("#example1").DataTable({
+                "language": {
+                    "oPaginate": {
+                        "sFirst":    "{{ 'dataTable.sFirst'|trans }}",
+                        "sLast":     "{{ 'dataTable.sLast'|trans }}",
+                        "sNext":     "{{ 'dataTable.sNext'|trans }}",
+                        "sPrevious": "{{ 'dataTable.sPrevious'|trans }}"
+                    },
+                    "lengthMenu": "{{ 'dataTable.show'|trans }} _MENU_ {{ 'dataTable.entries'|trans }}",
+                    "sSearch":         "{{ 'dataTable.search'|trans }}",
+                    "zeroRecords": "{{ 'dataTable.zeroRecords'|trans }}",
+                    "info": "{{ 'dataTable.info'|trans }} _PAGE_ {{ 'dataTable.of'|trans }} _PAGES_",
+                    "infoEmpty": "{{ 'dataTable.zeroRecords'|trans }}",
+                    "infoFiltered": "({{ 'dataTable.infoFiltered'|trans }} _MAX_ {{ 'dataTable.entries'|trans }})"
+                }
             });
         });
-
     </script>
 {% endblock %}
     {% block page_content %}
@@ -30,82 +36,79 @@
                     <a href="{{ path('unit_add') }}">{{ 'unit.add'|trans }}</a>
                 </div>
                 <div class="box-body">
-                    <div class="col-sm-12">
-                        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                            <table id="example1" class="table table-bordered table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th><i class="glyphicon glyphicon-user"></i></th>
-                                    <th>{{ 'unit.ha'|trans }}</th>
-                                    <th>{{ 'unit.hp'|trans }}</th>
-                                    <th>{{ 'unit.f'|trans }}</th>
-                                    <th>{{ 'unit.r'|trans }}</th>
-                                    <th>{{ 'unit.h'|trans }}</th>
-                                    <th>{{ 'unit.i'|trans }}</th>
-                                    <th>{{ 'unit.a'|trans }}</th>
-                                    <th>{{ 'unit.l'|trans }}</th>
-                                    <th>{{ 'unit.s'|trans }}</th>
-                                    <th>{{ 'navbar.army'|trans }}</th>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <th><i class="glyphicon glyphicon-wrench"></i>{{ 'generic.act'|trans }}</th>
-                                    {% endif %}
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for unit in units %}
-                                    <tr>
-                                        <td>
-                                            <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
-                                        </td>
+                    <table id="example1" class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th><i class="glyphicon glyphicon-user"></i></th>
+                            <th>{{ 'unit.ha'|trans }}</th>
+                            <th>{{ 'unit.hp'|trans }}</th>
+                            <th>{{ 'unit.f'|trans }}</th>
+                            <th>{{ 'unit.r'|trans }}</th>
+                            <th>{{ 'unit.h'|trans }}</th>
+                            <th>{{ 'unit.i'|trans }}</th>
+                            <th>{{ 'unit.a'|trans }}</th>
+                            <th>{{ 'unit.l'|trans }}</th>
+                            <th>{{ 'unit.s'|trans }}</th>
+                            <th>{{ 'navbar.army'|trans }}</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th><i class="glyphicon glyphicon-wrench"></i>{{ 'generic.act'|trans }}</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for unit in units %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('unit_show', {  'id':unit.id }) }}">{{ unit.name }}</a>
+                                </td>
 
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.Ha }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.Hp }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.F }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.R }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.H }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.I }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.A }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.L }}</a>
-                                        </td>
-                                        <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
-                                                {{ unit.S }}</a>
-                                        </td>
-                                        <td><a href="{{ path('army_show', {  'id':unit.army.id }) }}">
-                                                {{ unit.army }}</a>
-                                        </td>
-                                        {% if is_granted('ROLE_ADMIN') %}
-                                            <td>
-                                                <a href=" {{ path('unit_edit', { 'id':unit.id }) }}"><span
-                                                            class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}
-                                                </a><br>
-                                                <a href="{{ path('unit_delete', { 'id':unit.id }) }}" onclick="
-                                                        return confirm('{{ 'unit.delMsg'|trans }}')"><span
-                                                            class="glyphicon glyphicon-trash"
-                                                            id="eliminar"></span>{{ 'generic.del'|trans }}</a>
-                                            </td>
-                                        {% endif %}
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.Ha }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.Hp }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.F }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.R }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.H }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.I }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.A }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.L }}</a>
+                                </td>
+                                <td><a href="{{ path('unit_show', {  'id':unit.id }) }}">
+                                        {{ unit.S }}</a>
+                                </td>
+                                <td><a href="{{ path('army_show', {  'id':unit.army.id }) }}">
+                                        {{ unit.army }}</a>
+                                </td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td>
+                                        <a href=" {{ path('unit_edit', { 'id':unit.id }) }}"><span
+                                                    class="glyphicon glyphicon-pencil"></span>{{ 'generic.edt'|trans }}
+                                        </a><br>
+                                        <a href="{{ path('unit_delete', { 'id':unit.id }) }}" onclick="
+                                                return confirm('{{ 'unit.delMsg'|trans }}')"><span
+                                                    class="glyphicon glyphicon-trash"
+                                                    id="eliminar"></span>{{ 'generic.del'|trans }}</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
         <!-- /.container -->
