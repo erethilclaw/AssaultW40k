@@ -21,7 +21,7 @@ class ArmyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'army.nam'))
+            ->add('name', TextType::class, array('label' => 'army.nam','required' => false))
             ->add('image', FileType::class, array('label' => 'Image','required' => false));
     }
 

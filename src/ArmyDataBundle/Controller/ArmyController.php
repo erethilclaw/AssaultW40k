@@ -97,6 +97,10 @@ class ArmyController extends Controller
             return $this->redirectToRoute('army_show', array('id' => $army->getId()));
         }
 
+        if ($editForm->isSubmitted() && !$editForm->isValid()){
+            $army->setImage(new File($this->getParameter('army_directory') . '/' . $imgOri));
+        }
+
         return $this->render('@ArmyData/Army/edit_army.html.twig', array(
             'army' => $army,
             'edit_form' => $editForm->createView(),

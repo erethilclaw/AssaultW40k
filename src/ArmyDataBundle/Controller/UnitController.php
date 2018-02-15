@@ -98,6 +98,9 @@ class UnitController extends Controller
 
             return $this->redirectToRoute('unit_show', array('id' => $unit->getId()));
         }
+        if ($editForm->isSubmitted() && !$editForm->isValid()){
+            $unit->setImage(new File($this->getParameter('unit_directory') . '/' . $imgOri));
+        }
 
         return $this->render('@ArmyData/Unit/edit_unit.html.twig', array(
             'unit' => $unit,

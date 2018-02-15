@@ -2,30 +2,27 @@
 {% block title %}{{ "army.title"|trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <!-- DataTables -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
-    <!-- page script -->
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-                "language": {
-                    "oPaginate": {
-                        "sFirst":    "{{ 'dataTable.sFirst'|trans }}",
-                        "sLast":     "{{ 'dataTable.sLast'|trans }}",
-                        "sNext":     "{{ 'dataTable.sNext'|trans }}",
-                        "sPrevious": "{{ 'dataTable.sPrevious'|trans }}"
-                    },
-                    "lengthMenu": "{{ 'dataTable.show'|trans }} _MENU_ {{ 'dataTable.entries'|trans }}",
-                    "sSearch":         "{{ 'dataTable.search'|trans }}",
-                    "zeroRecords": "{{ 'dataTable.zeroRecords'|trans }}",
-                    "info": "{{ 'dataTable.info'|trans }} _PAGE_ {{ 'dataTable.of'|trans }} _PAGES_",
-                    "infoEmpty": "{{ 'dataTable.zeroRecords'|trans }}",
-                    "infoFiltered": "({{ 'dataTable.infoFiltered'|trans }} _MAX_ {{ 'dataTable.entries'|trans }})"
-                }
-            });
-        });
-    </script>
+<!-- DataTables -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<!-- page script -->
+<!-- version script to change languaje in datatables using cdn-->
+<script>
+    {% set locale = app.request.locale %}
+    {% if locale == 'es' %}
+    $(function () {
+        $("#example1").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            }
+        })
+    });
+    {% else %}
+    $(function () {
+        $("#example1").DataTable()
+    })
+    {% endif %}
+</script>
 {% endblock %}
     {% block page_content %}
         <!-- Page Content -->

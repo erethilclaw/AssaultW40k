@@ -13,7 +13,9 @@
                 <div class="box-body">
                     <div class="form-group ">
                         {{ form_label(edit_form.name) }}
-                        {{ form_errors(edit_form.name) }}
+                        <div style="color: red">
+                            {{ form_errors(edit_form.name) }}
+                        </div>
                         {{ form_widget(edit_form.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="col-md-4">

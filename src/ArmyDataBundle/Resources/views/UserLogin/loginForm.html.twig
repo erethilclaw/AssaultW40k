@@ -11,7 +11,7 @@
         <div class="login-box-body">
             <p class="login-box-msg">{{ "login.msglogin"|trans }}</p>
             {% if error %}
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
             <form action="{{ path('login_check') }}" method="post">
                 <div class="form-group has-feedback">

@@ -180,6 +180,9 @@ class WeaponController extends Controller
             $em->flush($weapon);
             return $this->redirectToRoute('wp_show', array('id' => $weapon->getId()));
         }
+        if ($editForm->isSubmitted() && !$editForm->isValid()){
+            $weapon->setImage(new File($this->getParameter('weapon_directory') . '/' . $imgOri));
+        }
 
         return $this->render('@ArmyData/Weapon/edit_wp.html.twig', array(
             'weapon' => $weapon,
