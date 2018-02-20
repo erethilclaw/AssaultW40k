@@ -1,6 +1,15 @@
 {% extends "base.html.twig" %}
 {% block title %}{{ 'army.new'|trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('#army').addClass('active');
+        });
+    </script>
+{% endblock %}
     {% block page_content %}
+        {% form_theme form 'ArmyDataBundle:Error:form_errors.html.twig' %}
         <!-- Page Content -->
         <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
             <div class="box box-primary">
@@ -12,9 +21,7 @@
                 <div class="box-body">
                     <div class="form-group form_row">
                         {{ form_label(form.name) }}
-                        <div style="color: red">
-                            {{ form_errors(form.name) }}
-                        </div>
+                        {{ form_errors(form.name) }}
                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="form-group ">

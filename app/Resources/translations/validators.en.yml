@@ -1,6 +1,6 @@
 validation:
     unit:
-        army: Choice army.
+        army: Choice an army.
         weapon: Choice weapon.
     army:
         empty: Can't be blank.

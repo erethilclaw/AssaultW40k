@@ -42,6 +42,7 @@ class Weapon
      *     minMessage="validation.weapon.min",
      *     maxMessage="validation.weapon.max"
      * )
+     * @Assert\NotBlank()
      */
     private $distance;
 
@@ -65,6 +66,7 @@ class Weapon
      * @ORM\Column(name="type", type="string", length=255)
      * @Assert\Choice({"Asalto","Pesada","Fuego Rapido","Artilleria"},
      *     message="validation.weapon.type")
+     *  @Assert\NotBlank()
      */
     private $type;
 
@@ -78,12 +80,14 @@ class Weapon
      *     minMessage="validation.weapon.min",
      *     maxMessage="validation.weapon.max"
      * )
+     * @Assert\NotBlank()
      */
     private $shoots;
 
     /**
      * Many Weapons have many Armies
      * @ORM\ManyToMany(targetEntity="ArmyDataBundle\Entity\Army", mappedBy="weapons")
+     *
      */
     private $armies;
 

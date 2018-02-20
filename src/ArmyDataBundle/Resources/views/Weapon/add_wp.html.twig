@@ -135,10 +135,14 @@
                 $unitFormLi.remove();
             });
         }
-
+        //set active menu
+        $(document).ready(function () {
+            $('#weapon').addClass('active');
+        });
     </script>
 {% endblock %}
     {% block page_content %}
+        {% form_theme form 'ArmyDataBundle:Error:form_errors.html.twig' %}
         <!-- Page Content -->
         <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
             <div class="box box-primary">
@@ -183,6 +187,9 @@
                                 {{ form_errors(form.type) }}
                                 {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
                             </div>
+
+                        </div>
+                        <div class="row">
                             <div class="form-group  col-md-3 col-lg-3 col-sm-3 col-xs-3 ">
                                 {{ form_label(form.shoots) }}
                                 {{ form_errors(form.shoots) }}

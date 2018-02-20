@@ -29,7 +29,7 @@ generic:
     list: volver a lista
     conf: ¿Seguro que quiere eliminar este elemento?
     delMsg: ¿Estas seguro que quieres eliminar?
-    choose: Elije opción.
+    choose: Elije opción
     current_img: Imagen actual
 dataTable:
     show: Mostrar

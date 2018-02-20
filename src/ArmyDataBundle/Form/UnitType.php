@@ -23,7 +23,7 @@ class UnitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('name',TextType::class, array ('label' => 'unit.nam'))
+        ->add('name',TextType::class, array ('label' => 'unit.nam','required' => false))
         ->add('ha', ChoiceType::class, array ('choices' => range(0,10)))
             ->add('hp', ChoiceType::class, array ('choices' => range(0,10)))
             ->add('f', ChoiceType::class, array ('choices' => range(0,10)))
@@ -40,9 +40,11 @@ class UnitType extends AbstractType
                 '5+' => 5,
                 '6+' => 6)))
             ->add('army', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+                'placeholder'=> 'generic.choose',
                 'required' => false,
                 'class' => 'ArmyDataBundle\Entity\Army',
-                'label' => 'army.nam'
+                'label' => 'army.nam',
+
             ))
             ->add('weapons',CollectionType::class, [
                 'entry_type' => EntityType::class,

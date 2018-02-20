@@ -24,20 +24,20 @@ class WeaponType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'weapon.nam'))
-            ->add('distance', IntegerType::class, array('label' => 'weapon.ds'))
+            ->add('name', TextType::class, array('label' => 'weapon.nam','required'=>false))
+            ->add('distance', IntegerType::class, array('label' => 'weapon.ds','required'=>false))
             ->add('f', ChoiceType::class, array('choices' => range(0, 10)))
             ->add('fp', ChoiceType::class, array('choices' => range(0, 10)))
             ->add('type', ChoiceType::class, array('choices' => array(
-                'generic.choose' => 'blank',
                 'weapon.as' => 'Asalto',
                 'weapon.ps' => 'Pesada',
                 'weapon.rf' => 'Fuego Rapido',
-                'weapon.ar' => 'Artilleria',
-            ), 'label' => 'weapon.tp'
+                'weapon.ar' => 'Artilleria'
+            ), 'label' => 'weapon.tp','required'=>false,
+                'placeholder' => 'generic.choose'
             ))
             ->add('shoots', IntegerType::class, array(
-                'label' => 'weapon.st'
+                'label' => 'weapon.st','required'=>false
             ))
             ->add('armies', CollectionType::class, [
                 'entry_type' => EntityType::class,

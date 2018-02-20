@@ -69,10 +69,14 @@
                 $destinatariFormLi.remove();
             });
         }
+        $(document).ready(function () {
+            $('#unit').addClass('active');
+        });
 
     </script>
 {% endblock %}
     {% block page_content %}
+        {% form_theme form 'ArmyDataBundle:Error:form_errors.html.twig' %}
 <!-- Page Content -->
 <div class="col-md-6 col-lg-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
     <div class="box box-primary">
@@ -87,6 +91,7 @@
                 <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12 ">
                     {{ form_label(form.name) }}
                     {{ form_errors(form.name) }}
+
                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -170,3 +175,14 @@
 </div>
 <!-- /.container -->
 {% endblock %}
+{#{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul>
+                {% for error in errors %}
+                    <li class="error-message">{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}#}
